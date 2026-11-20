@@ -184,7 +184,7 @@
     return '<header class="top"><button class="icon-btn" data-act="settings" aria-label="Ajustes">' + gear() + "</button></header>";
   }
 
-  function treeBlock(streak) {
+  function treeBlock(streak, showNext) {
     var week = L.weekOf(streak);
     var tree = L.treeForWeek(week);
     var seen = state.lastSeenWeek;
@@ -193,14 +193,19 @@
     var oldCanvas = vanish
       ? '<canvas class="tree-canvas old" data-week="' + seen + '"></canvas>'
       : "";
-    var preview = next === null
-      ? '<span class="next-cap">Fim</span>'
-      : '<canvas class="tree-next" data-week="' + next + '" width="72" height="56" aria-label="Próxima etapa, coberta de preto"></canvas>';
+    var preview = "";
+    if (showNext !== false) {
+      preview = next === null
+        ? '<p class="next-cap">Árvore Iluminada</p>'
+        : '<div class="next-sway"><canvas class="tree-next" data-week="' + next + '" width="120" height="88" aria-label="Próxima etapa, coberta de preto"></canvas></div>';
+    }
     return '<div class="art">' +
       '<div class="tree-wrap' + (vanish ? " vanish" : "") + '">' +
       oldCanvas +
       '<div class="tree-sway"><canvas class="tree-canvas live" data-week="' + week + '"></canvas></div></div>' +
-      '<div class="art-meta"><p class="tree-name">' + esc(tree.name) + "</p>" + preview + "</div></div>";
+      '<p class="tree-name">' + esc(tree.name) + "</p>" +
+      preview +
+      "</div>";
   }
 
   function home() {
@@ -217,11 +222,12 @@
     var broke = state.broke && st !== "done"
       ? '<p class="note">A sequência zerou. A maior foi ' + esc(dayWord(state.best)) + ". A semente recomeça.</p>"
       : "";
+    var word = VERSES.filter(function (item) { return item.ref.indexOf("Timóteo") !== -1; })[0];
     return top() +
       '<main class="stage">' +
       treeBlock(state.streak || 0) +
-      "<h1>M 6:33</h1>" +
-      '<p class="sub">Medite na Palavra antes do que distrai.</p>' +
+      '<h1 class="verse-title">“' + esc(word.text) + '”</h1>' +
+      '<p class="ref">' + esc(word.ref) + "</p>" +
       '<p class="meta">' + esc(prettyDate(todayKey())) + " · " + esc(cardTitle) + "</p>" +
       '<p class="meta">Sequência <strong>' + esc(dayWord(state.streak || 0)) + "</strong> · Maior <strong>" + esc(dayWord(state.best || 0)) + "</strong></p>" +
       broke +
@@ -246,23 +252,33 @@
     return best;
   }
 
+  function markIcon(id) {
+    var common = 'width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"';
+    if (id === "semana") return "<svg " + common + '><path d="M5 19V10M12 19V5M19 19v-7"/></svg>';
+    if (id === "mes") return "<svg " + common + '><path d="M8 3v3M16 3v3M4 9h16"/><rect x="4" y="5" width="16" height="15" rx="2"/></svg>';
+    if (id === "semestre") return "<svg " + common + '><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M18.4 5.6 17 7M7 17l-1.4 1.4"/><circle cx="12" cy="12" r="4"/></svg>';
+    if (id === "ano") return "<svg " + common + '><circle cx="12" cy="12" r="4"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22"/></svg>';
+    if (id === "5a") return "<svg " + common + '><path d="m12 3 2.2 4.6 5 .7-3.6 3.5.9 5L12 14.8 7.5 16.8l.9-5L4.8 8.3l5-.7z"/></svg>';
+    return "<svg " + common + '><path d="M4 16.5 7 8l3 5 2-8 2 8 3-5 3 8.5"/><path d="M3 19h18"/></svg>';
+  }
+
   function progress() {
     var streak = state.streak || 0;
     var next = nextMark(streak);
     var left = next.days - streak;
     var marks = [
-      ["Semana", "7 dias seguidos"],
-      ["Mês", "30 dias seguidos"],
-      ["Semestre", "180 dias seguidos"],
-      ["Ano", "365 dias seguidos"],
-      ["5 anos", "1.825 dias seguidos"],
-      ["10 anos", "3.650 dias seguidos"]
+      ["semana", "Semana", "7 dias seguidos"],
+      ["mes", "Mês", "30 dias seguidos"],
+      ["semestre", "Semestre", "180 dias seguidos"],
+      ["ano", "Ano", "365 dias seguidos"],
+      ["5a", "5 anos", "1.825 dias seguidos"],
+      ["10a", "10 anos", "3.650 dias seguidos"]
     ].map(function (row) {
-      return "<li><b>" + esc(row[0]) + "</b><span>" + esc(row[1]) + "</span></li>";
+      return '<li><span class="mark-ico">' + markIcon(row[0]) + "</span><div><b>" + esc(row[1]) + "</b><span>" + esc(row[2]) + "</span></div></li>";
     }).join("");
     return top() +
       '<main class="stage">' +
-      treeBlock(streak) +
+      treeBlock(streak, false) +
       "<h1>" + esc(dayWord(streak)) + "</h1>" +
       '<p class="sub">Maior: ' + esc(dayWord(state.best || 0)) + ". Faltam " + esc(left) + " dias para " + esc(next.label) + ".</p>" +
       '<ul class="milestones">' + marks + "</ul>" +
@@ -271,12 +287,17 @@
 
   function about() {
     return top() +
-      '<main class="stage"><div class="prose">' +
+      '<main class="stage about"><div class="prose">' +
       "<h1>Sobre</h1>" +
-      "<p>O nome <b>M 6:33</b> é o versículo 33 do capítulo 6 de Mateus.</p>" +
+      "<p>O nome <b>M 6:33</b> é o versículo 33 do capítulo 6 do Evangelho de Mateus.</p>" +
       "<blockquote>“Mas buscai primeiro o reino de Deus, e a sua justiça, e todas estas coisas vos serão acrescentadas.”</blockquote>" +
       "<p class=\"ref\">Mateus 6.33</p>" +
-      "<p>A Palavra vem primeiro. A pergunta volta à meia-noite, e tudo fica neste celular.</p>" +
+      "<p>O app leva esse nome porque a Palavra vem primeiro. Antes dos apps que você escolheu, uma pergunta: você já meditou na Bíblia hoje?</p>" +
+      "<p>O dia é o dia do calendário deste celular, da meia-noite até a próxima. Não é uma janela de 24 horas. Leu às 8h ou às 23h50, no dia seguinte a pergunta volta.</p>" +
+      "<p>Sim e sim de novo contam o dia e somam a sequência. Se um dia ficar de fora, a sequência zera. A maior sequência fica guardada. Semana, mês, semestre, ano, 5 anos e 10 anos têm uma mensagem, cada uma mais celebrada que a anterior. Só essa mensagem de parabéns fica de propósito mais solta e torta.</p>" +
+      "<p>Tudo fica neste aparelho. O protótipo não pede internet para funcionar depois de aberto, e não envia a sua leitura para lugar nenhum.</p>" +
+      "<p>Este protótipo ainda não cobre o Instagram de verdade. No Android, isso pede permissões do sistema. Aqui você percorre a pergunta, o silêncio e a árvore. Para ver a sequência crescer, use Ajustes e avance um dia, depois responda de novo.</p>" +
+      "<p>App da Bíblia escolhido: " + esc(state.bibleApp || "nenhum") + ".<br>Apps da pergunta: " + esc((state.intercept || []).join(", ") || "nenhum") + ".</p>" +
       "</div></main>" + nav("about") + mascot();
   }
 

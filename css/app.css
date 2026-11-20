@@ -73,6 +73,8 @@ img { max-width: 100%; }
   flex: 0 0 auto;
   min-height: 40px;
   padding: 4px 8px 0;
+  position: relative;
+  z-index: 9;
 }
 .icon-btn {
   width: 42px;
@@ -91,6 +93,7 @@ img { max-width: 100%; }
   overflow: hidden;
   padding: 0 0 4px;
 }
+.stage.about { overflow: auto; -webkit-overflow-scrolling: touch; }
 .tree {
   width: min(250px, 68vw);
   height: 210px;
@@ -109,6 +112,14 @@ h1 {
   line-height: 1.1;
   letter-spacing: -0.035em;
 }
+.verse-title {
+  margin: 8px 28px 0;
+  font-family: Palatino, "Palatino Linotype", Georgia, serif;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: 0;
+}
 .sub {
   margin: 4px 28px 8px;
   text-align: center;
@@ -117,7 +128,7 @@ h1 {
   line-height: 1.3;
 }
 .tree-name {
-  margin: 0;
+  margin: 6px 0 0;
   text-align: center;
   color: var(--green);
   font-size: 13px;
@@ -269,10 +280,10 @@ blockquote {
 
 .mascot-btn {
   position: fixed;
-  width: 72px;
-  right: max(6px, calc(50vw - 215px + 6px));
-  top: 44px;
-  z-index: 7;
+  width: 68px;
+  right: max(8px, calc(50vw - 215px + 8px));
+  top: 72px;
+  z-index: 4;
   border: 0;
   padding: 0;
   background: transparent;
@@ -285,35 +296,32 @@ blockquote {
 }
 .art {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 8px;
-  margin: 0 78px 0 16px;
-}
-.art-meta {
-  width: 72px;
-  flex: 0 0 72px;
-  text-align: center;
+  margin: 0 16px;
 }
 .tree-wrap {
   position: relative;
-  height: 112px;
-  flex: 1 1 auto;
-  margin: 0;
+  width: min(180px, 52vw);
+  height: 118px;
+  margin: 0 auto;
 }
-.tree-wrap.large { height: 112px; }
 .tree-sway, .tree-canvas.old {
   position: absolute;
   inset: 0;
 }
-.tree-sway { animation: sway 5.5s ease-in-out infinite; transform-origin: 50% 92%; }
+.tree-sway, .next-sway {
+  animation: sway 2.4s ease-in-out infinite;
+  transform-origin: 50% 100%;
+}
 .tree-canvas { width: 100%; height: 100%; display: block; }
+.next-sway { width: 86px; height: 64px; margin: 10px auto 0; }
 .tree-next {
   display: block;
-  width: 64px;
-  height: 50px;
-  margin: 4px auto 0;
+  width: 86px;
+  height: 64px;
   background: #efe8dc;
-  border-radius: 10px;
+  border-radius: 12px;
 }
 .next-cap {
   display: block;
@@ -333,8 +341,8 @@ blockquote {
 }
 .say {
   position: fixed;
-  z-index: 8;
-  top: 52px;
+  z-index: 5;
+  top: 78px;
   right: calc(max(6px, calc(50vw - 215px + 6px)) + 76px);
   width: min(196px, calc(100vw - 130px));
   background: var(--white);
@@ -362,8 +370,8 @@ blockquote {
 .wilder h2 { animation: pulse 0.55s ease-in-out infinite; }
 .wilder .comic { animation: shake 0.28s linear infinite; }
 @keyframes sway {
-  0%, 100% { transform: rotate(-0.8deg); }
-  50% { transform: rotate(0.8deg); }
+  0%, 100% { transform: rotate(-7deg) translateY(0); }
+  50% { transform: rotate(7deg) translateY(-8px); }
 }
 @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -486,21 +494,29 @@ blockquote {
 .gallery figcaption { font-size: 12px; color: var(--muted); margin-top: 4px; }
 
 .milestones {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 6px 14px;
-  margin: 8px 22px 0;
+  margin: 4px 18px 0;
   padding: 0;
 }
 .milestones li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   list-style: none;
-  padding: 0;
-  border: 0;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--line);
 }
-.milestones b { display: block; font-size: 14px; }
-.milestones span { color: var(--muted); font-size: 12px; }
+.mark-ico {
+  width: 28px;
+  height: 28px;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  color: var(--green);
+}
+.milestones b { display: block; font-size: 15px; }
+.milestones span { color: var(--muted); font-size: 13px; }
 
-.prose { margin: 4px 16px 0 20px; padding-right: 68px; line-height: 1.35; font-size: 14px; }
+.prose { margin: 4px 20px 0; padding-right: 72px; line-height: 1.45; font-size: 15px; }
 .prose p { margin: 0 0 8px; }
 .prose blockquote { font-size: 16px; line-height: 1.35; margin: 8px 0; }
 .prose .ref { text-align: left; font-size: 12px; }
