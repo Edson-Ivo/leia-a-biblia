@@ -1,4 +1,4 @@
-var CACHE = "leia-a-biblia-2";
+var CACHE = "leia-a-biblia-3";
 var FILES = [
   "./",
   "./index.html",

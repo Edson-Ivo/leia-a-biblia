@@ -1,6 +1,6 @@
-# Leia a Bíblia
+# M 6:33
 
-Protótipo para o celular. Um lembrete leve para meditar na Bíblia antes dos apps que distraem, com a sequência de dias e a árvore que cresce.
+Protótipo para o celular. O nome é o versículo 33 do capítulo 6 de Mateus: buscar primeiro o reino de Deus. Um lembrete leve para meditar na Bíblia antes dos apps que distraem, com a sequência de dias e a árvore que cresce.
 
 Tudo fica no próprio aparelho. Depois da primeira abertura, o protótipo funciona sem internet.
 

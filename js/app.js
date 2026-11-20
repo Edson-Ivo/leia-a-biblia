@@ -221,7 +221,7 @@
     return top() +
       '<main class="stage">' +
       treeBlock(state.streak || 0, false) +
-      "<h1>Leia a Bíblia</h1>" +
+      "<h1>M 6:33</h1>" +
       '<p class="sub">Medite na Palavra antes do que distrai.</p>' +
       '<section class="card"><div class="card-icon">' + cal() + "</div><div>" +
       '<div class="kicker">Hoje, ' + esc(prettyDate(todayKey())) + "</div>" +
@@ -282,13 +282,16 @@
     return top() +
       '<main class="stage"><div class="prose">' +
       "<h1 style=\"text-align:left;margin-left:0\">Sobre</h1>" +
-      "<p>Leia a Bíblia é um lembrete leve. Antes dos apps que você escolheu, uma pergunta: você já meditou na Bíblia hoje?</p>" +
+      "<p>O nome <b>M 6:33</b> é o versículo 33 do capítulo 6 do Evangelho de Mateus.</p>" +
+      "<blockquote>“Mas buscai primeiro o reino de Deus, e a sua justiça, e todas estas coisas vos serão acrescentadas.”</blockquote>" +
+      "<p class=\"ref\">Mateus 6.33</p>" +
+      "<p>O app leva esse nome porque a Palavra vem primeiro. Antes dos apps que você escolheu, uma pergunta: você já meditou na Bíblia hoje?</p>" +
       "<p>O dia é o dia do calendário deste celular, da meia-noite até a próxima. Não é uma janela de 24 horas. Leu às 8h ou às 23h50, no dia seguinte a pergunta volta.</p>" +
       "<p>Sim e sim de novo contam o dia e somam a sequência. Se um dia ficar de fora, a sequência zera. A maior sequência fica guardada. Semana, mês, semestre, ano, 5 anos e 10 anos têm uma mensagem, cada uma mais celebrada que a anterior.</p>" +
       "<p>Tudo fica neste aparelho. O protótipo não pede internet para funcionar depois de aberto, e não envia a sua leitura para lugar nenhum.</p>" +
       "<p>Este protótipo ainda não cobre o Instagram de verdade. No Android, isso pede permissões do sistema. Aqui você percorre a pergunta, o silêncio e a árvore. Para ver a sequência crescer, use Ajustes e avance um dia, depois responda de novo.</p>" +
       "<p>App da Bíblia escolhido: " + esc(state.bibleApp || "nenhum") + ".<br>Apps da pergunta: " + esc((state.intercept || []).join(", ") || "nenhum") + ".</p>" +
-      "</div></main>" + nav("about") + mascot();
+      "</div></main>" + nav("about");
   }
 
   function onboarding() {
