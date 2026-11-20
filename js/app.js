@@ -33,9 +33,38 @@
     }
   ];
 
+  var SAYINGS = [
+    { kind: "Leia de novo", ref: "Josué 1.8", text: "Não se aparte da tua boca o livro desta lei; antes, medita nele dia e noite." },
+    { kind: "A igreja", ref: "Hebreus 10.25", text: "Não deixemos a nossa congregação, como é costume de alguns." },
+    { kind: "Os irmãos", ref: "Atos 2.42", text: "Perseveravam na doutrina dos apóstolos, na comunhão, no partir do pão e nas orações." },
+    { kind: "Leia de novo", ref: "Salmos 1.2", text: "O seu prazer está na lei do Senhor, e na sua lei medita de dia e de noite." },
+    { kind: "A igreja", ref: "Salmos 122.1", text: "Alegrei-me quando me disseram: Vamos à casa do Senhor." },
+    { kind: "Os irmãos", ref: "1 João 1.7", text: "Se andarmos na luz, como ele está na luz, temos comunhão uns com os outros." },
+    { kind: "Leia de novo", ref: "Mateus 4.4", text: "Nem só de pão viverá o homem, mas de toda palavra que sai da boca de Deus." },
+    { kind: "A igreja", ref: "Lucas 4.16", text: "Num sábado, segundo o seu costume, entrou na sinagoga." },
+    { kind: "Os irmãos", ref: "Hebreus 10.24", text: "Consideremo-nos uns aos outros, para nos estimularmos ao amor e às boas obras." },
+    { kind: "Leia de novo", ref: "Tiago 1.22", text: "Sede cumpridores da palavra, e não somente ouvintes." },
+    { kind: "A igreja", ref: "Mateus 18.20", text: "Onde estiverem dois ou três reunidos em meu nome, aí estou eu no meio deles." },
+    { kind: "Os irmãos", ref: "Eclesiastes 4.9-10", text: "Melhor é serem dois do que um. Se um cair, o outro levanta o seu companheiro." },
+    { kind: "Leia de novo", ref: "João 5.39", text: "Examinais as Escrituras, porque julgais ter nelas a vida eterna." },
+    { kind: "A igreja", ref: "Salmos 84.10", text: "Vale mais um dia nos teus átrios do que mil em outra parte." },
+    { kind: "Os irmãos", ref: "Gálatas 6.2", text: "Levai as cargas uns dos outros e assim cumprireis a lei de Cristo." },
+    { kind: "Leia de novo", ref: "Atos 17.11", text: "Examinavam cada dia nas Escrituras se estas coisas eram assim." },
+    { kind: "A igreja", ref: "Atos 2.46", text: "Todos os dias perseveravam unânimes no templo." },
+    { kind: "Os irmãos", ref: "João 13.35", text: "Nisto conhecerão todos que sois meus discípulos: se vos amardes uns aos outros." },
+    { kind: "Leia de novo", ref: "Colossenses 3.16", text: "A palavra de Cristo habite em vós abundantemente." },
+    { kind: "Os irmãos", ref: "1 Tessalonicenses 5.11", text: "Consolai-vos uns aos outros e edificai-vos uns aos outros." },
+    { kind: "Leia de novo", ref: "Romanos 15.4", text: "Tudo que dantes foi escrito, para nosso ensino foi escrito." },
+    { kind: "Os irmãos", ref: "Romanos 12.10", text: "Amai-vos cordialmente uns aos outros com amor fraternal." },
+    { kind: "Leia de novo", ref: "Salmos 119.11", text: "Escondi a tua palavra no meu coração, para eu não pecar contra ti." },
+    { kind: "Os irmãos", ref: "Malaquias 3.16", text: "Os que temiam ao Senhor falavam cada um ao seu companheiro." }
+  ];
+
   var state;
   var screen = "home";
   var overlay = null;
+  var silenceOrigin = "priority";
+  var bubble = false;
   var slide = 0;
   var pendingMilestone = null;
   var clockTimer = null;
@@ -139,23 +168,43 @@
     return '<nav class="nav">' + item("home", "Início", "home") + item("progress", "Progresso", "progress") + item("about", "Sobre", "about") + "</nav>";
   }
 
+  function mascotFile() {
+    var st = status();
+    if (st === "done") return "boneco-feliz.jpg";
+    if (st === "silent") return "boneco-desconfiado.jpg";
+    return "boneco.jpg";
+  }
+
   function mascot() {
-    return '<img class="mascot" src="' + asset("boneco.jpg") + '" alt="">';
+    var label = status() === "silent" ? "Boneco desconfiado. Ouvir um versículo" : "Boneco. Ouvir um versículo";
+    return '<button class="mascot-btn" data-act="mascot" aria-label="' + esc(label) + '"><img src="' + asset(mascotFile()) + '" alt=""></button>';
   }
 
   function top() {
     return '<header class="top"><button class="icon-btn" data-act="settings" aria-label="Ajustes">' + gear() + "</button></header>";
   }
 
-  function treeImg(streak, large) {
-    var tree = L.treeFor(streak);
-    return '<img class="tree' + (large ? " large" : "") + '" src="' + asset(tree.file) + '" alt="Árvore no estágio ' + esc(tree.name) + '">' +
-      '<p class="tree-name">' + esc(tree.name) + "</p>";
+  function treeBlock(streak, large) {
+    var week = L.weekOf(streak);
+    var tree = L.treeForWeek(week);
+    var seen = state.lastSeenWeek;
+    var vanish = seen !== null && seen !== undefined && seen !== week;
+    var next = week < L.MAX_WEEK ? week + 1 : null;
+    var oldCanvas = vanish
+      ? '<canvas class="tree-canvas old" data-week="' + seen + '"></canvas>'
+      : "";
+    var preview = next === null
+      ? '<p class="note">Árvore Iluminada. Dois anos de leitura.</p>'
+      : '<p class="group-label">Próxima etapa</p><canvas class="tree-next" data-week="' + next + '" width="140" height="110" aria-hidden="true"></canvas><p class="help">Coberta de preto. A forma seguinte só aparece na semana dela.</p>';
+    return '<div class="tree-wrap' + (large ? " large" : "") + (vanish ? " vanish" : "") + '">' +
+      oldCanvas +
+      '<div class="tree-sway"><canvas class="tree-canvas live" data-week="' + week + '"></canvas></div></div>' +
+      '<p class="tree-name">' + esc(tree.name) + "</p>" +
+      preview;
   }
 
   function home() {
     var st = status();
-    var tree = L.treeFor(state.streak || 0);
     var cardTitle = "A pergunta ainda está de pé.";
     var button = '<button class="gold" data-act="ask">Já meditei hoje?</button>';
     if (st === "done") {
@@ -163,7 +212,7 @@
       button = '<button class="gold" disabled>Até a meia-noite, sem pergunta</button>';
     } else if (st === "silent") {
       cardTitle = "Silenciado até " + clock(state.silenceUntil) + ".";
-      button = '<button class="gold" disabled>Os apps abrem sem pergunta</button>';
+      button = '<button class="gold" data-act="silence-home">Alterar o silêncio</button>';
     }
     var broke = state.broke && st !== "done"
       ? '<p class="note">A sequência zerou. A maior foi ' + esc(dayWord(state.best)) + ". A semente recomeça.</p>"
@@ -171,7 +220,7 @@
     var verse = verseToday();
     return top() +
       '<main class="stage">' +
-      treeImg(state.streak || 0) +
+      treeBlock(state.streak || 0, false) +
       "<h1>Leia a Bíblia</h1>" +
       '<p class="sub">Medite na Palavra antes do que distrai.</p>' +
       '<section class="card"><div class="card-icon">' + cal() + "</div><div>" +
@@ -207,11 +256,6 @@
     var streak = state.streak || 0;
     var next = nextMark(streak);
     var left = next.days - streak;
-    var gallery = L.TREES.map(function (tree) {
-      var here = L.treeFor(streak).file === tree.file;
-      return '<figure class="' + (here ? "here" : "") + '"><img src="' + asset(tree.file) + '" alt="' + esc(tree.name) + '"><figcaption>' +
-        esc(tree.name) + (here ? " · agora" : "") + "</figcaption></figure>";
-    }).join("");
     var marks = [
       ["Semana", "7 dias seguidos"],
       ["Mês", "30 dias seguidos"],
@@ -220,16 +264,14 @@
       ["5 anos", "1.825 dias seguidos"],
       ["10 anos", "3.650 dias seguidos"]
     ].map(function (row) {
-      return "<li><b>" + esc(row[0]) + "</b><span>" + esc(row[1]) + ". A mensagem fica mais solene quanto maior o tempo.</span></li>";
+      return "<li><b>" + esc(row[0]) + "</b><span>" + esc(row[1]) + ". A festa fica maior a cada marco.</span></li>";
     }).join("");
     return top() +
       '<main class="stage">' +
-      treeImg(streak, true) +
-      "<h1>" + esc(streak) + (streak === 1 ? " dia" : " dias") + "</h1>" +
-      '<p class="sub">Maior sequência: ' + esc(dayWord(state.best || 0)) + ". A árvore segue a sequência de agora. Se um dia ficar sem leitura, ela volta a ser semente. A maior sequência continua guardada.</p>" +
+      treeBlock(streak, true) +
+      "<h1>" + esc(dayWord(streak)) + "</h1>" +
+      '<p class="sub">Maior sequência: ' + esc(dayWord(state.best || 0)) + ". A cada semana de leitura a árvore muda, por dois anos, até a Árvore Iluminada. Se um dia ficar sem leitura, a sequência e a árvore recomeçam. A maior sequência continua guardada.</p>" +
       '<p class="note">Faltam ' + esc(left) + " dias para " + esc(next.label) + ".</p>" +
-      '<p class="group-label">Da semente à árvore antiga</p>' +
-      '<div class="gallery">' + gallery + "</div>" +
       '<p class="group-label">Quando a mensagem chega</p>' +
       '<ul class="milestones">' + marks + "</ul>" +
       '<p class="prose">A pergunta volta todo dia, à meia-noite, mesmo que a sequência continue. A sequência só zera se um dia passar sem o sim verdadeiro.</p>' +
@@ -279,6 +321,20 @@
     );
   }
 
+  function celebrateScore(m) {
+    var base = { semana: 1, mes: 2.6, semestre: 4.4, ano: 6.2, "5a": 8.2, "10a": 10 }[m.id] || 1;
+    return base + Math.min(m.count - 1, 10) * 0.45;
+  }
+
+  function comicLine(text, score) {
+    return text.split(" ").map(function (word, i) {
+      var size = Math.round(16 + score * 2.4 + ((i * 13) % Math.max(2, Math.round(score * 3))));
+      var rot = (((i * 17) % 15) - 7) * score * 0.45;
+      var y = (((i * 5) % 7) - 3) * score * 0.7;
+      return '<span style="font-size:' + size + 'px;transform:rotate(' + rot.toFixed(1) + 'deg) translateY(' + y.toFixed(1) + 'px)">' + esc(word) + "</span>";
+    }).join(" ");
+  }
+
   function celebrate() {
     var m = pendingMilestone;
     var titles = {
@@ -289,11 +345,15 @@
       "5a": m.count === 1 ? "Cinco anos" : (m.count * 5) + " anos",
       "10a": m.count === 1 ? "Dez anos" : (m.count * 10) + " anos"
     };
-    return '<div class="overlay cele cele-' + esc(m.id) + '">' +
+    var score = celebrateScore(m);
+    var wild = score >= 4 ? " wild" : "";
+    if (score >= 7) wild += " wilder";
+    var titleSize = Math.round(28 + score * 5);
+    return '<div class="overlay cele cele-' + esc(m.id) + wild + '">' +
       '<p class="eyebrow">Parabéns</p>' +
-      treeImg(m.streak, true) +
-      "<h2>" + esc(titles[m.id]) + "</h2>" +
-      '<p class="lead">' + esc(m.message) + "</p>" +
+      treeBlock(m.streak, true) +
+      '<h2 style="font-size:' + titleSize + 'px">' + esc(titles[m.id]) + "</h2>" +
+      '<p class="lead comic">' + comicLine(m.message, score) + "</p>" +
       '<div class="actions"><button class="gold" data-act="close">Continuar</button></div></div>';
   }
 
@@ -318,7 +378,7 @@
     return '<div class="overlay"><h2>Silenciar</h2>' +
       '<p class="help">O silêncio vale só até a meia-noite de hoje. Ainda cabem ' + esc(L.formatMinutes(max)) + ".</p>" +
       choices +
-      '<button class="line" data-act="back-priority">Voltar</button></div>';
+      '<button class="line" data-act="silence-back">Voltar</button></div>';
   }
 
   function customScreen() {
@@ -327,8 +387,9 @@
       '<p class="help">Horas e minutos. Não passa da meia-noite. Ainda cabem ' + esc(L.formatMinutes(max)) + ".</p>" +
       '<div class="fields"><label><span>Horas</span><input id="hours" inputmode="numeric" value="0"></label>' +
       '<label><span>Minutos</span><input id="mins" inputmode="numeric" value="15"></label></div>' +
+      '<p class="warn" id="custom-error"></p>' +
       '<button class="gold" data-act="custom-ok">Silenciar</button>' +
-      '<button class="line" data-act="silence-open">Voltar</button></div>';
+      '<button class="line" data-act="custom-back">Voltar</button></div>';
   }
 
   function readScreen() {
@@ -349,6 +410,9 @@
     }
     return '<div class="overlay sheet"><header class="top"><button class="icon-btn" data-act="close" aria-label="Fechar">' + gear() + "</button></header>" +
       "<h2>Ajustes</h2>" +
+      '<p class="group-label">Aparência</p><div class="chips">' +
+      chips(["Como o celular", "Claro", "Escuro"], [({ auto: "Como o celular", light: "Claro", dark: "Escuro" })[state.theme || "auto"]], "theme") +
+      "</div>" +
       '<p class="group-label">App da Bíblia</p><div class="chips">' + chips(BIBLE_APPS, [state.bibleApp], "bible") + "</div>" +
       '<p class="group-label">Apps da pergunta</p><div class="chips">' + chips(DISTRACTIONS, state.intercept || [], "intercept") + "</div>" +
       '<p class="help">Neste protótipo a lista é de exemplo. No Android, serão os apps instalados no celular.</p>' +
@@ -394,15 +458,189 @@
     else if (screen === "progress") html = progress();
     else if (screen === "about") html = about();
     else html = home();
-    root.innerHTML = html + overlayHtml();
+    applyTheme();
+    root.innerHTML = html + overlayHtml() + talkBubble();
     punchImages();
+    paintTrees();
     armClock();
   }
 
+  function applyTheme() {
+    var theme = state.theme || "auto";
+    document.documentElement.setAttribute("data-theme", theme);
+    var dark = theme === "dark" || (theme === "auto" && window.matchMedia("(prefers-color-scheme: dark)").matches);
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute("content", dark ? "#141210" : "#F7F4EE");
+  }
+
+  function talkBubble() {
+    if (!bubble) return "";
+    var item = SAYINGS[(state.talk || 0) % SAYINGS.length];
+    return '<div class="bubble"><p class="kicker">' + esc(item.kind) + "</p><p>" + esc(item.text) + '</p><p class="ref">' + esc(item.ref) + '</p><button class="gold" data-act="mascot">Outro versículo</button><button class="line" data-act="close-talk">Fechar</button></div>';
+  }
+
   var punched = {};
+  var treeCache = {};
+
+  function paintTrees() {
+    var weekNow = L.weekOf(state.streak || 0);
+    var canvases = Array.prototype.slice.call(root.querySelectorAll("canvas[data-week]"));
+    var left = canvases.length;
+    function done() {
+      left -= 1;
+      if (left > 0) return;
+      window.requestAnimationFrame(function () {
+        window.requestAnimationFrame(function () {
+          root.querySelectorAll(".tree-wrap.vanish").forEach(function (wrap) {
+            wrap.classList.add("play");
+          });
+        });
+      });
+    }
+    canvases.forEach(function (canvas) {
+      drawWeek(canvas, Number(canvas.getAttribute("data-week")), canvas.classList.contains("tree-next"), done);
+    });
+    if (state.lastSeenWeek !== weekNow) {
+      window.setTimeout(function () {
+        state.lastSeenWeek = weekNow;
+        save();
+      }, state.lastSeenWeek == null ? 0 : 1500);
+    }
+  }
+
+  function drawWeek(canvas, week, silhouette, done) {
+    var tree = L.treeForWeek(week);
+    var key = tree.file + ":" + week + ":" + (silhouette ? "b" : "c");
+    if (treeCache[key]) {
+      paintCached(canvas, treeCache[key]);
+      if (done) done();
+      return;
+    }
+    var image = new Image();
+    image.onload = function () {
+      var w = image.naturalWidth;
+      var h = image.naturalHeight;
+      var off = document.createElement("canvas");
+      off.width = w;
+      off.height = h;
+      var ctx = off.getContext("2d");
+      ctx.drawImage(image, 0, 0);
+      var pixels = ctx.getImageData(0, 0, w, h);
+      var px = pixels.data;
+      var i;
+      for (i = 0; i < px.length; i += 4) {
+        var r = px[i];
+        var g = px[i + 1];
+        var b = px[i + 2];
+        if (r > 226 && g > 214 && b > 190 && (r - b) < 55 && (r - g) < 30) px[i + 3] = 0;
+      }
+      ctx.putImageData(pixels, 0, 0);
+      if (!silhouette) decorateWeek(ctx, w, h, week);
+      var framed = cropOpaque(off);
+      if (silhouette) {
+        var cover = framed.getContext("2d");
+        cover.globalCompositeOperation = "source-in";
+        cover.fillStyle = "#111";
+        cover.fillRect(0, 0, framed.width, framed.height);
+      }
+      treeCache[key] = framed;
+      paintCached(canvas, framed);
+      if (done) done();
+    };
+    image.onerror = function () {
+      if (done) done();
+    };
+    image.src = asset(tree.file);
+  }
+
+  function paintCached(canvas, source) {
+    var width = canvas.classList.contains("tree-next") ? 140 : 520;
+    var height = canvas.classList.contains("tree-next") ? 110 : 420;
+    canvas.width = width;
+    canvas.height = height;
+    var ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, width, height);
+    var scale = Math.min(width / source.width, height / source.height);
+    var dw = source.width * scale;
+    var dh = source.height * scale;
+    ctx.drawImage(source, (width - dw) / 2, (height - dh) / 2, dw, dh);
+  }
+
+  function cropOpaque(source) {
+    var w = source.width;
+    var h = source.height;
+    var data = source.getContext("2d").getImageData(0, 0, w, h).data;
+    var minX = w;
+    var minY = h;
+    var maxX = 0;
+    var maxY = 0;
+    var found = false;
+    var y;
+    var x;
+    for (y = 0; y < h; y += 2) {
+      for (x = 0; x < w; x += 2) {
+        if (data[(y * w + x) * 4 + 3] > 24) {
+          found = true;
+          if (x < minX) minX = x;
+          if (y < minY) minY = y;
+          if (x > maxX) maxX = x;
+          if (y > maxY) maxY = y;
+        }
+      }
+    }
+    if (!found) return source;
+    var pad = Math.round(Math.min(w, h) * 0.04);
+    minX = Math.max(0, minX - pad);
+    minY = Math.max(0, minY - pad);
+    maxX = Math.min(w - 1, maxX + pad);
+    maxY = Math.min(h - 1, maxY + pad);
+    var cw = maxX - minX + 1;
+    var ch = maxY - minY + 1;
+    var cropped = document.createElement("canvas");
+    cropped.width = cw;
+    cropped.height = ch;
+    cropped.getContext("2d").drawImage(source, minX, minY, cw, ch, 0, 0, cw, ch);
+    return cropped;
+  }
+
+  function decorateWeek(ctx, w, h, week) {
+    if (week <= 0 || week >= L.MAX_WEEK) return;
+    if (L.treeForWeek(week).week === week) return;
+    var rand = seeded(week * 97 + 13);
+    var colors = ["#e85d75", "#f2c14e", "#7c5cdb", "#3cb37a", "#f08a3c", "#4aa3d8", "#fff4c2"];
+    var marks = 2 + (week % 8);
+    var n;
+    ctx.save();
+    for (n = 0; n < marks; n += 1) {
+      var x = w * (0.22 + rand() * 0.56);
+      var y = h * (0.12 + rand() * 0.42);
+      ctx.fillStyle = colors[(week + n) % colors.length];
+      ctx.beginPath();
+      ctx.arc(x, y, 6 + (week % 5) + rand() * 6, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    if (week >= 16) {
+      for (n = 0; n < 1 + (week % 4); n += 1) {
+        ctx.fillStyle = n % 2 ? "#e23d3d" : "#f0b429";
+        ctx.beginPath();
+        ctx.arc(w * (0.3 + rand() * 0.4), h * (0.18 + rand() * 0.3), 8 + rand() * 6, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+    ctx.restore();
+  }
+
+  function seeded(seed) {
+    var value = seed % 2147483646;
+    if (value <= 0) value += 2147483646;
+    return function () {
+      value = (value * 16807) % 2147483647;
+      return (value - 1) / 2147483646;
+    };
+  }
 
   function punchImages() {
-    root.querySelectorAll(".tree, .mascot, .gallery img").forEach(function (img) {
+    root.querySelectorAll(".tree, .mascot-btn img, .gallery img").forEach(function (img) {
       var src = img.getAttribute("src");
       if (!src || src.indexOf("data:") === 0) return;
       if (punched[src]) {
@@ -446,9 +684,8 @@
 
   function startSilence(minutes, custom) {
     var max = maxSilence();
-    if (max < 1) return;
-    var amount = Math.min(minutes, max);
-    if (amount < 1) return;
+    if (!L.silenceFits(minutes, max)) return;
+    var amount = minutes;
     var now = nowMs();
     state.silenceUntil = now + amount * 60000;
     state.silenceDate = todayKey();
@@ -476,7 +713,24 @@
       render();
       return;
     }
-    if (act === "settings") { overlay = "settings"; render(); return; }
+    if (act === "settings") { overlay = "settings"; bubble = false; render(); return; }
+    if (act === "mascot") {
+      if (bubble) state.talk = (state.talk || 0) + 1;
+      bubble = true;
+      save();
+      render();
+      return;
+    }
+    if (act === "close-talk") { bubble = false; render(); return; }
+    if (act === "theme") {
+      var picked = el.getAttribute("data-name");
+      state.theme = picked === "Claro" ? "light" : picked === "Escuro" ? "dark" : "auto";
+      save();
+      render();
+      return;
+    }
+    if (act === "silence-home") { silenceOrigin = "home"; overlay = "silence"; render(); return; }
+    if (act === "silence-back") { overlay = silenceOrigin === "home" ? null : "priority"; render(); return; }
     if (act === "close") { overlay = null; pendingMilestone = null; render(); return; }
     if (act === "ask") {
       if (status() === "open") overlay = "q1";
@@ -501,7 +755,8 @@
       return;
     }
     if (act === "read") { overlay = "read"; render(); return; }
-    if (act === "silence-open") { overlay = "silence"; render(); return; }
+    if (act === "silence-open") { silenceOrigin = "priority"; overlay = "silence"; render(); return; }
+    if (act === "custom-back") { overlay = "silence"; render(); return; }
     if (act === "back-priority") { overlay = "priority"; render(); return; }
     if (act === "custom") { overlay = "custom"; render(); return; }
     if (act === "silence") {
@@ -512,7 +767,16 @@
       var hours = Math.max(0, Number(document.getElementById("hours").value) || 0);
       var mins = Math.max(0, Number(document.getElementById("mins").value) || 0);
       var total = hours * 60 + mins;
-      if (total < 1) return;
+      var max = maxSilence();
+      var warn = document.getElementById("custom-error");
+      if (!L.silenceFits(total, max)) {
+        if (warn) {
+          warn.textContent = total < 1
+            ? "Escolha pelo menos 1 minuto."
+            : "Esse tempo passa da meia-noite de hoje. Ainda cabem " + L.formatMinutes(max) + ".";
+        }
+        return;
+      }
       startSilence(total, true);
       return;
     }
@@ -569,6 +833,23 @@
 
   load();
   render();
+  if (window.matchMedia) {
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function () {
+      if ((state.theme || "auto") === "auto") applyTheme();
+    });
+  }
+  root.addEventListener("input", function (event) {
+    if (event.target.id !== "hours" && event.target.id !== "mins") return;
+    var hours = Math.max(0, Number(document.getElementById("hours").value) || 0);
+    var mins = Math.max(0, Number(document.getElementById("mins").value) || 0);
+    var warn = document.getElementById("custom-error");
+    if (!warn) return;
+    var total = hours * 60 + mins;
+    var max = maxSilence();
+    warn.textContent = total > max
+      ? "Esse tempo passa da meia-noite de hoje. Ainda cabem " + L.formatMinutes(max) + "."
+      : "";
+  });
 
   if ("serviceWorker" in navigator && location.protocol.indexOf("http") === 0) {
     navigator.serviceWorker.register("sw.js").catch(function () {});

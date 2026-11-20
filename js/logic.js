@@ -10,18 +10,21 @@
     { id: "semana", days: 7, name: "uma semana" }
   ];
 
+  var MAX_WEEK = 104;
   var TREES = [
-    { min: 0, file: "tree-00-semente.jpg", name: "Semente" },
-    { min: 1, file: "tree-01-broto.jpg", name: "Broto" },
-    { min: 3, file: "tree-02-muda.jpg", name: "Muda" },
-    { min: 7, file: "tree-03-planta.jpg", name: "Planta" },
-    { min: 14, file: "tree-04-jovem.jpg", name: "Árvore jovem" },
-    { min: 30, file: "tree-05-arvore.jpg", name: "Árvore" },
-    { min: 90, file: "tree-06-cheia.jpg", name: "Árvore cheia" },
-    { min: 180, file: "tree-07-madura.jpg", name: "Árvore madura" },
-    { min: 365, file: "tree-08-grande.jpg", name: "Árvore grande" },
-    { min: 1825, file: "tree-09-gigante.jpg", name: "Árvore gigante" },
-    { min: 3650, file: "tree-10-antiga.jpg", name: "Árvore antiga" }
+    { week: 0, file: "tree-00-semente.jpg", name: "Semente" },
+    { week: 1, file: "tree-01-broto.jpg", name: "Broto" },
+    { week: 2, file: "tree-c02-botao.jpg", name: "Botão" },
+    { week: 4, file: "tree-c03-flores.jpg", name: "Flores" },
+    { week: 7, file: "tree-c04-rosa.jpg", name: "Florada rosa" },
+    { week: 11, file: "tree-c05-violeta.jpg", name: "Violeta" },
+    { week: 16, file: "tree-c06-frutos.jpg", name: "Primeiros frutos" },
+    { week: 22, file: "tree-c07-pomar.jpg", name: "Pomar" },
+    { week: 30, file: "tree-c08-vermelho.jpg", name: "Flores e frutos" },
+    { week: 40, file: "tree-c09-ouro.jpg", name: "Copa de ouro" },
+    { week: 52, file: "tree-c10-lanternas.jpg", name: "Lanternas" },
+    { week: 68, file: "tree-c11-crepusculo.jpg", name: "Crepúsculo" },
+    { week: 104, file: "tree-c12-iluminada.jpg", name: "Árvore Iluminada" }
   ];
 
   function pad(n) {
@@ -55,7 +58,10 @@
       broke: false,
       lastCustomMinutes: null,
       silenceUntil: null,
-      silenceDate: null
+      silenceDate: null,
+      theme: "auto",
+      lastSeenWeek: null,
+      talk: 0
     };
   }
 
@@ -187,13 +193,28 @@
     return choices;
   }
 
-  function treeFor(streak) {
+  function weekOf(streak) {
+    var week = Math.floor((streak || 0) / 7);
+    if (week < 0) week = 0;
+    if (week > MAX_WEEK) week = MAX_WEEK;
+    return week;
+  }
+
+  function treeForWeek(week) {
     var chosen = TREES[0];
     var i;
     for (i = 0; i < TREES.length; i += 1) {
-      if (streak >= TREES[i].min) chosen = TREES[i];
+      if (week >= TREES[i].week) chosen = TREES[i];
     }
     return chosen;
+  }
+
+  function treeFor(streak) {
+    return treeForWeek(weekOf(streak));
+  }
+
+  function silenceFits(minutes, maxMinutes) {
+    return minutes >= 1 && minutes <= maxMinutes;
   }
 
   function formatMinutes(total) {
@@ -208,6 +229,10 @@
   var api = {
     TIERS: TIERS,
     TREES: TREES,
+    MAX_WEEK: MAX_WEEK,
+    weekOf: weekOf,
+    treeForWeek: treeForWeek,
+    silenceFits: silenceFits,
     dateKey: dateKey,
     parseKey: parseKey,
     addDays: addDays,

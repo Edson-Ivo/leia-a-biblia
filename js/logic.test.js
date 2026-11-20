@@ -73,15 +73,20 @@ assert.strictEqual(L.silenceActive(silenced, day1, 500), true);
 assert.strictEqual(L.silenceActive(silenced, day1, 1000), false);
 assert.strictEqual(L.reconcile(silenced, day2).silenceUntil, null);
 
+assert.strictEqual(L.weekOf(0), 0);
+assert.strictEqual(L.weekOf(6), 0);
+assert.strictEqual(L.weekOf(7), 1);
 assert.strictEqual(L.treeFor(0).name, "Semente");
-assert.strictEqual(L.treeFor(1).name, "Broto");
-assert.strictEqual(L.treeFor(7).name, "Planta");
-assert.strictEqual(L.treeFor(29).name, "Árvore jovem");
-assert.strictEqual(L.treeFor(30).name, "Árvore");
-assert.strictEqual(L.treeFor(365).name, "Árvore grande");
-assert.strictEqual(L.treeFor(1825).name, "Árvore gigante");
-assert.strictEqual(L.treeFor(3650).name, "Árvore antiga");
-assert.strictEqual(L.treeFor(0).file, "tree-00-semente.jpg");
+assert.strictEqual(L.treeFor(7).name, "Broto");
+assert.strictEqual(L.treeFor(14).name, "Botão");
+assert.strictEqual(L.weekOf(728), 104);
+assert.strictEqual(L.treeFor(728).name, "Árvore Iluminada");
+assert.strictEqual(L.treeFor(900).name, "Árvore Iluminada");
+assert.strictEqual(L.treeForWeek(8).file, L.treeForWeek(9).file);
+assert.notStrictEqual(L.treeForWeek(10).file, L.treeForWeek(11).file);
+assert.strictEqual(L.silenceFits(30, 20), false);
+assert.strictEqual(L.silenceFits(20, 20), true);
+assert.strictEqual(L.silenceFits(0, 20), false);
 
 assert.strictEqual(L.addDays("2026-11-20", 1), "2026-11-21");
 assert.strictEqual(L.formatMinutes(75), "1 h 15 min");

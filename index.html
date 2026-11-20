@@ -6,6 +6,16 @@
   <meta name="theme-color" content="#F7F4EE">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <script>
+    (function () {
+      try {
+        var saved = JSON.parse(localStorage.getItem("leia-a-biblia") || "{}");
+        document.documentElement.setAttribute("data-theme", saved.theme || "auto");
+      } catch (err) {
+        document.documentElement.setAttribute("data-theme", "auto");
+      }
+    })();
+  </script>
   <title>Leia a Bíblia</title>
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="assets/tree-05-arvore.jpg">

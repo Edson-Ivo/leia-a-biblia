@@ -1,4 +1,4 @@
-var CACHE = "leia-a-biblia-1";
+var CACHE = "leia-a-biblia-2";
 var FILES = [
   "./",
   "./index.html",
@@ -7,6 +7,19 @@ var FILES = [
   "./js/app.js",
   "./manifest.webmanifest",
   "./assets/boneco.jpg",
+  "./assets/boneco-feliz.jpg",
+  "./assets/boneco-desconfiado.jpg",
+  "./assets/tree-c02-botao.jpg",
+  "./assets/tree-c03-flores.jpg",
+  "./assets/tree-c04-rosa.jpg",
+  "./assets/tree-c05-violeta.jpg",
+  "./assets/tree-c06-frutos.jpg",
+  "./assets/tree-c07-pomar.jpg",
+  "./assets/tree-c08-vermelho.jpg",
+  "./assets/tree-c09-ouro.jpg",
+  "./assets/tree-c10-lanternas.jpg",
+  "./assets/tree-c11-crepusculo.jpg",
+  "./assets/tree-c12-iluminada.jpg",
   "./assets/tree-00-semente.jpg",
   "./assets/tree-01-broto.jpg",
   "./assets/tree-02-muda.jpg",
