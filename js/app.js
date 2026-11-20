@@ -187,20 +187,22 @@
 
   function treeBlock(streak, showNext, withMascot) {
     var week = L.weekOf(streak);
-    var tree = L.treeForWeek(week);
+    var place = L.stageForWeek(week);
+    var tree = place.stage;
     var seen = state.lastSeenWeek;
-    var vanish = seen !== null && seen !== undefined && seen !== week;
-    var next = week < L.MAX_WEEK ? week + 1 : null;
-    var oldCanvas = vanish
-      ? '<canvas class="tree-canvas old" data-week="' + seen + '"></canvas>'
+    var seenPlace = seen === null || seen === undefined ? null : L.stageForWeek(seen);
+    var vanish = seenPlace && seenPlace.stage.week !== place.stage.week;
+    var next = place.next;
+    var oldLayer = vanish
+      ? '<div class="tree-phase old"><canvas class="tree-canvas old" data-week="' + seen + '"></canvas></div>'
       : "";
     var home = showNext !== false && withMascot !== false;
     var preview = "";
-    if (showNext !== false && next !== null) {
+    if (showNext !== false && next) {
       var caption = home
         ? '<p class="next-line"><svg width="14" height="16" viewBox="0 0 14 16" aria-hidden="true"><path d="M7 1v11M7 12 3 8.2M7 12l4-3.8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg> Próxima etapa será</p>'
         : "";
-      preview = caption + '<canvas class="tree-next" data-week="' + next + '" width="120" height="88" aria-label="Próxima etapa, coberta de preto"></canvas>';
+      preview = caption + '<canvas class="tree-next" data-week="' + next.week + '" width="120" height="88" aria-label="Próxima etapa, coberta de preto"></canvas>';
     }
     var buddy = withMascot === false ? "" : mascot();
     var phase = home
@@ -209,9 +211,10 @@
     var name = home ? "" : '<p class="tree-name">' + esc(tree.name) + "</p>";
     return '<div class="art">' + phase +
       '<div class="tree-row">' + buddy +
-      '<div class="tree-wrap' + (vanish ? " vanish" : "") + '">' +
-      oldCanvas +
-      '<div class="tree-sway"><canvas class="tree-canvas live" data-week="' + week + '"></canvas></div></div></div>' +
+      '<div class="tree-wrap' + (vanish ? " vanish" : "") + '"><div class="tree-sway">' +
+      oldLayer +
+      '<div class="tree-phase live"><canvas class="tree-canvas live" data-week="' + week + '"></canvas></div>' +
+      "</div></div></div>" +
       name +
       preview +
       "</div>";
@@ -520,10 +523,12 @@
       drawWeek(canvas, Number(canvas.getAttribute("data-week")), canvas.classList.contains("tree-next"), done);
     });
     if (state.lastSeenWeek !== weekNow) {
+      var seenPlace = state.lastSeenWeek == null ? null : L.stageForWeek(state.lastSeenWeek);
+      var stageChanged = seenPlace && seenPlace.stage.week !== L.stageForWeek(weekNow).stage.week;
       window.setTimeout(function () {
         state.lastSeenWeek = weekNow;
         save();
-      }, state.lastSeenWeek == null ? 0 : 1500);
+      }, stageChanged ? 1500 : 0);
     }
   }
 
@@ -551,10 +556,16 @@
         var r = px[i];
         var g = px[i + 1];
         var b = px[i + 2];
-        if (r > 226 && g > 214 && b > 190 && (r - b) < 55 && (r - g) < 30) px[i + 3] = 0;
+        var maxc = r > g ? r : g;
+        var minc = r < g ? r : g;
+        if (b > maxc) maxc = b;
+        if (b < minc) minc = b;
+        var nearWhite = minc > 208 && (maxc - minc) < 32;
+        var cream = r > 226 && g > 214 && b > 190 && (r - b) < 55 && (r - g) < 30;
+        if (nearWhite || cream) px[i + 3] = 0;
       }
       ctx.putImageData(pixels, 0, 0);
-      if (!silhouette) decorateWeek(ctx, w, h, week);
+      if (!silhouette) growWeek(ctx, w, h, week);
       var framed = cropOpaque(off);
       if (silhouette) {
         var cover = framed.getContext("2d");
@@ -622,40 +633,117 @@
     return cropped;
   }
 
-  function decorateWeek(ctx, w, h, week) {
-    if (week <= 0 || week >= L.MAX_WEEK) return;
-    if (L.treeForWeek(week).week === week) return;
-    var rand = seeded(week * 97 + 13);
-    var colors = ["#e85d75", "#f2c14e", "#7c5cdb", "#3cb37a", "#f08a3c", "#4aa3d8", "#fff4c2"];
-    var marks = 2 + (week % 8);
-    var n;
+  function growWeek(ctx, w, h, week) {
+    var place = L.stageForWeek(week);
+    if (!place.step) return;
+    var box = opaqueBox(ctx, w, h);
+    if (!box) return;
+    var cx = (box.l + box.r) / 2;
+    var top = box.t + (box.b - box.t) * 0.06;
+    var bh = box.b - box.t;
     ctx.save();
-    for (n = 0; n < marks; n += 1) {
-      var x = w * (0.22 + rand() * 0.56);
-      var y = h * (0.12 + rand() * 0.42);
-      ctx.fillStyle = colors[(week + n) % colors.length];
-      ctx.beginPath();
-      ctx.arc(x, y, 6 + (week % 5) + rand() * 6, 0, Math.PI * 2);
-      ctx.fill();
-    }
-    if (week >= 16) {
-      for (n = 0; n < 1 + (week % 4); n += 1) {
-        ctx.fillStyle = n % 2 ? "#e23d3d" : "#f0b429";
-        ctx.beginPath();
-        ctx.arc(w * (0.3 + rand() * 0.4), h * (0.18 + rand() * 0.3), 8 + rand() * 6, 0, Math.PI * 2);
-        ctx.fill();
-      }
-    }
+    if (place.stage.name === "Semente") drawFromSeed(ctx, cx, top, bh, place.step);
+    else drawFromCrown(ctx, cx, top, bh, place.step, place.stage.name);
     ctx.restore();
   }
 
-  function seeded(seed) {
-    var value = seed % 2147483646;
-    if (value <= 0) value += 2147483646;
-    return function () {
-      value = (value * 16807) % 2147483647;
-      return (value - 1) / 2147483646;
-    };
+  function opaqueBox(ctx, w, h) {
+    var data = ctx.getImageData(0, 0, w, h).data;
+    var minX = w;
+    var minY = h;
+    var maxX = 0;
+    var maxY = 0;
+    var found = false;
+    var y;
+    var x;
+    for (y = 0; y < h; y += 4) {
+      for (x = 0; x < w; x += 4) {
+        if (data[(y * w + x) * 4 + 3] > 24) {
+          found = true;
+          if (x < minX) minX = x;
+          if (y < minY) minY = y;
+          if (x > maxX) maxX = x;
+          if (y > maxY) maxY = y;
+        }
+      }
+    }
+    if (!found) return null;
+    return { l: minX, t: minY, r: maxX, b: maxY };
+  }
+
+  function leaf(ctx, x, y, rx, ry, rot, color) {
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.rotate(rot);
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.ellipse(0, 0, rx, ry, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = "rgba(255,255,255,0.45)";
+    ctx.lineWidth = Math.max(3, rx * 0.12);
+    ctx.beginPath();
+    ctx.moveTo(0, ry * 0.55);
+    ctx.quadraticCurveTo(rx * 0.05, 0, 0, -ry * 0.72);
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  function stem(ctx, x, y, height, width) {
+    ctx.fillStyle = "#6d8f52";
+    ctx.beginPath();
+    ctx.roundRect(x - width / 2, y - height, width, height + width, width);
+    ctx.fill();
+  }
+
+  function drawFromSeed(ctx, x, y, bh, step) {
+    ctx.fillStyle = "#5c3a24";
+    ctx.beginPath();
+    ctx.ellipse(x, y + bh * 0.08, bh * 0.05, bh * 0.025, 0, 0, Math.PI * 2);
+    ctx.fill();
+    if (step < 1) return;
+    var height = bh * (step === 1 ? 0.16 : step === 2 ? 0.4 : 0.68);
+    var width = Math.max(10, bh * 0.045);
+    stem(ctx, x, y, height, width);
+    if (step === 1) {
+      ctx.fillStyle = "#3e7a45";
+      ctx.beginPath();
+      ctx.ellipse(x, y - height, width * 1.15, width * 0.8, 0, 0, Math.PI * 2);
+      ctx.fill();
+      return;
+    }
+    var leafW = bh * (step === 2 ? 0.11 : 0.16);
+    var leafH = leafW * 1.7;
+    leaf(ctx, x - leafW * 0.85, y - height + leafH * 0.15, leafW, leafH, -0.7, "#3e7a45");
+    if (step >= 3) {
+      leaf(ctx, x + leafW * 0.85, y - height + leafH * 0.2, leafW * 0.92, leafH * 0.92, 0.65, "#2f6a38");
+    }
+  }
+
+  function drawFromCrown(ctx, x, y, bh, step, name) {
+    var n = Math.min(step, 6);
+    var height = bh * (0.08 + n * 0.07);
+    var width = Math.max(8, bh * 0.03);
+    var fruit = name.indexOf("fruto") !== -1 || name === "Pomar" || name === "Copa de ouro";
+    var flower = name === "Botão" || name === "Flores" || name === "Florada rosa" || name === "Violeta";
+    stem(ctx, x, y, height, width);
+    var i;
+    for (i = 0; i < n; i += 1) {
+      var side = i % 2 ? 1 : -1;
+      var yy = y - height * (0.35 + (i % 3) * 0.22);
+      if (fruit && i % 2 === 1) {
+        ctx.fillStyle = i % 4 === 1 ? "#e23d3d" : "#f0b429";
+        ctx.beginPath();
+        ctx.arc(x + side * bh * 0.08, yy, bh * 0.045, 0, Math.PI * 2);
+        ctx.fill();
+      } else if (flower && i === n - 1) {
+        ctx.fillStyle = name === "Violeta" ? "#7c5cdb" : "#e85d86";
+        ctx.beginPath();
+        ctx.ellipse(x, y - height, bh * 0.06, bh * 0.08, 0, 0, Math.PI * 2);
+        ctx.fill();
+      } else {
+        leaf(ctx, x + side * bh * 0.07, yy, bh * 0.055, bh * 0.09, side * -0.6, i % 2 ? "#2f6a38" : "#3e7a45");
+      }
+    }
   }
 
   function punchImages() {

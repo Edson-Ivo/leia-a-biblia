@@ -13,17 +13,17 @@
   var MAX_WEEK = 104;
   var TREES = [
     { week: 0, file: "tree-00-semente.jpg", name: "Semente" },
-    { week: 1, file: "tree-01-broto.jpg", name: "Broto" },
-    { week: 2, file: "tree-c02-botao.jpg", name: "Botão" },
-    { week: 4, file: "tree-c03-flores.jpg", name: "Flores" },
-    { week: 7, file: "tree-c04-rosa.jpg", name: "Florada rosa" },
-    { week: 11, file: "tree-c05-violeta.jpg", name: "Violeta" },
-    { week: 16, file: "tree-c06-frutos.jpg", name: "Primeiros frutos" },
-    { week: 22, file: "tree-c07-pomar.jpg", name: "Pomar" },
-    { week: 30, file: "tree-c08-vermelho.jpg", name: "Flores e frutos" },
-    { week: 40, file: "tree-c09-ouro.jpg", name: "Copa de ouro" },
-    { week: 52, file: "tree-c10-lanternas.jpg", name: "Lanternas" },
-    { week: 68, file: "tree-c11-crepusculo.jpg", name: "Crepúsculo" },
+    { week: 4, file: "tree-01-broto.jpg", name: "Broto" },
+    { week: 8, file: "tree-c02-botao.jpg", name: "Botão" },
+    { week: 12, file: "tree-c03-flores.jpg", name: "Flores" },
+    { week: 18, file: "tree-c04-rosa.jpg", name: "Florada rosa" },
+    { week: 26, file: "tree-c05-violeta.jpg", name: "Violeta" },
+    { week: 36, file: "tree-c06-frutos.jpg", name: "Primeiros frutos" },
+    { week: 46, file: "tree-c07-pomar.jpg", name: "Pomar" },
+    { week: 56, file: "tree-c08-vermelho.jpg", name: "Flores e frutos" },
+    { week: 66, file: "tree-c09-ouro.jpg", name: "Copa de ouro" },
+    { week: 76, file: "tree-c10-lanternas.jpg", name: "Lanternas" },
+    { week: 88, file: "tree-c11-crepusculo.jpg", name: "Crepúsculo" },
     { week: 104, file: "tree-c12-iluminada.jpg", name: "Árvore Iluminada" }
   ];
 
@@ -201,12 +201,26 @@
   }
 
   function treeForWeek(week) {
-    var chosen = TREES[0];
+    return stageForWeek(week).stage;
+  }
+
+  function stageForWeek(week) {
+    var stage = TREES[0];
+    var index = 0;
     var i;
     for (i = 0; i < TREES.length; i += 1) {
-      if (week >= TREES[i].week) chosen = TREES[i];
+      if (week >= TREES[i].week) {
+        stage = TREES[i];
+        index = i;
+      }
     }
-    return chosen;
+    var next = index < TREES.length - 1 ? TREES[index + 1] : null;
+    var end = next ? next.week : MAX_WEEK + 1;
+    var span = Math.max(1, end - stage.week);
+    var step = week - stage.week;
+    if (step < 0) step = 0;
+    if (step > span - 1) step = span - 1;
+    return { stage: stage, next: next, index: index, span: span, step: step };
   }
 
   function treeFor(streak) {
@@ -232,6 +246,7 @@
     MAX_WEEK: MAX_WEEK,
     weekOf: weekOf,
     treeForWeek: treeForWeek,
+    stageForWeek: stageForWeek,
     silenceFits: silenceFits,
     dateKey: dateKey,
     parseKey: parseKey,
