@@ -92,8 +92,15 @@ img { max-width: 100%; }
   min-height: 0;
   overflow: hidden;
   padding: 0 0 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
-.stage.about { overflow: auto; -webkit-overflow-scrolling: touch; }
+.stage.about {
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  justify-content: flex-start;
+}
 .tree {
   width: min(250px, 68vw);
   height: 210px;
@@ -278,12 +285,21 @@ blockquote {
   margin: 4px auto 0;
 }
 
-.mascot-btn {
-  position: fixed;
-  width: 68px;
-  right: max(8px, calc(50vw - 215px + 8px));
-  top: 72px;
+.pal {
+  position: absolute;
+  top: 0;
+  right: 4px;
   z-index: 4;
+  width: 68px;
+}
+.stage.about .pal {
+  position: fixed;
+  top: 64px;
+  right: max(8px, calc(50vw - 215px + 8px));
+}
+.mascot-btn {
+  position: relative;
+  width: 68px;
   border: 0;
   padding: 0;
   background: transparent;
@@ -295,6 +311,7 @@ blockquote {
   animation: float 3.4s ease-in-out infinite;
 }
 .art {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -340,11 +357,11 @@ blockquote {
   min-height: 1.2em;
 }
 .say {
-  position: fixed;
+  position: absolute;
   z-index: 5;
-  top: 78px;
-  right: calc(max(6px, calc(50vw - 215px + 6px)) + 76px);
-  width: min(196px, calc(100vw - 130px));
+  top: 8px;
+  right: 74px;
+  width: min(196px, calc(100vw - 150px));
   background: var(--white);
   color: var(--ink);
   border-radius: 16px;

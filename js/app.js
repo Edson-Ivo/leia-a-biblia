@@ -177,14 +177,15 @@
 
   function mascot() {
     var label = status() === "silent" ? "Boneco desconfiado. Ouvir um versículo" : "Boneco. Ouvir um versículo";
-    return '<button class="mascot-btn" data-act="mascot" aria-label="' + esc(label) + '"><img src="' + asset(mascotFile()) + '" alt=""></button>';
+    return '<div class="pal">' + talkBubble() +
+      '<button class="mascot-btn" data-act="mascot" aria-label="' + esc(label) + '"><img src="' + asset(mascotFile()) + '" alt=""></button></div>';
   }
 
   function top() {
     return '<header class="top"><button class="icon-btn" data-act="settings" aria-label="Ajustes">' + gear() + "</button></header>";
   }
 
-  function treeBlock(streak, showNext) {
+  function treeBlock(streak, showNext, withMascot) {
     var week = L.weekOf(streak);
     var tree = L.treeForWeek(week);
     var seen = state.lastSeenWeek;
@@ -199,7 +200,8 @@
         ? '<p class="next-cap">Árvore Iluminada</p>'
         : '<div class="next-sway"><canvas class="tree-next" data-week="' + next + '" width="120" height="88" aria-label="Próxima etapa, coberta de preto"></canvas></div>';
     }
-    return '<div class="art">' +
+    var buddy = withMascot === false ? "" : mascot();
+    return '<div class="art">' + buddy +
       '<div class="tree-wrap' + (vanish ? " vanish" : "") + '">' +
       oldCanvas +
       '<div class="tree-sway"><canvas class="tree-canvas live" data-week="' + week + '"></canvas></div></div>' +
@@ -232,7 +234,7 @@
       '<p class="meta">Sequência <strong>' + esc(dayWord(state.streak || 0)) + "</strong> · Maior <strong>" + esc(dayWord(state.best || 0)) + "</strong></p>" +
       broke +
       button +
-      "</main>" + nav("home") + mascot();
+      "</main>" + nav("home");
   }
 
   function nextMark(streak) {
@@ -282,12 +284,12 @@
       "<h1>" + esc(dayWord(streak)) + "</h1>" +
       '<p class="sub">Maior: ' + esc(dayWord(state.best || 0)) + ". Faltam " + esc(left) + " dias para " + esc(next.label) + ".</p>" +
       '<ul class="milestones">' + marks + "</ul>" +
-      "</main>" + nav("progress") + mascot();
+      "</main>" + nav("progress");
   }
 
   function about() {
     return top() +
-      '<main class="stage about"><div class="prose">' +
+      '<main class="stage about">' + mascot() + '<div class="prose">' +
       "<h1>Sobre</h1>" +
       "<p>O nome <b>M 6:33</b> é o versículo 33 do capítulo 6 do Evangelho de Mateus.</p>" +
       "<blockquote>“Mas buscai primeiro o reino de Deus, e a sua justiça, e todas estas coisas vos serão acrescentadas.”</blockquote>" +
@@ -298,7 +300,7 @@
       "<p>Tudo fica neste aparelho. O protótipo não pede internet para funcionar depois de aberto, e não envia a sua leitura para lugar nenhum.</p>" +
       "<p>Este protótipo ainda não cobre o Instagram de verdade. No Android, isso pede permissões do sistema. Aqui você percorre a pergunta, o silêncio e a árvore. Para ver a sequência crescer, use Ajustes e avance um dia, depois responda de novo.</p>" +
       "<p>App da Bíblia escolhido: " + esc(state.bibleApp || "nenhum") + ".<br>Apps da pergunta: " + esc((state.intercept || []).join(", ") || "nenhum") + ".</p>" +
-      "</div></main>" + nav("about") + mascot();
+      "</div></main>" + nav("about");
   }
 
   function onboarding() {
@@ -361,7 +363,7 @@
     var titleSize = Math.round(28 + score * 5);
     return '<div class="overlay cele cele-' + esc(m.id) + wild + '">' +
       '<p class="eyebrow">Parabéns</p>' +
-      treeBlock(m.streak) +
+      treeBlock(m.streak, true, false) +
       '<h2 style="font-size:' + titleSize + 'px">' + esc(titles[m.id]) + "</h2>" +
       '<p class="lead comic">' + comicLine(m.message, score) + "</p>" +
       '<div class="actions"><button class="gold" data-act="close">Continuar</button></div></div>';
@@ -469,7 +471,7 @@
     else if (screen === "about") html = about();
     else html = home();
     applyTheme();
-    root.innerHTML = html + overlayHtml() + talkBubble();
+    root.innerHTML = html + overlayHtml();
     punchImages();
     paintTrees();
     armClock();
