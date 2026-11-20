@@ -184,7 +184,7 @@
     return '<header class="top"><button class="icon-btn" data-act="settings" aria-label="Ajustes">' + gear() + "</button></header>";
   }
 
-  function treeBlock(streak, large) {
+  function treeBlock(streak) {
     var week = L.weekOf(streak);
     var tree = L.treeForWeek(week);
     var seen = state.lastSeenWeek;
@@ -194,13 +194,13 @@
       ? '<canvas class="tree-canvas old" data-week="' + seen + '"></canvas>'
       : "";
     var preview = next === null
-      ? '<p class="note">Árvore Iluminada. Dois anos de leitura.</p>'
-      : '<p class="group-label">Próxima etapa</p><canvas class="tree-next" data-week="' + next + '" width="140" height="110" aria-hidden="true"></canvas><p class="help">Coberta de preto. A forma seguinte só aparece na semana dela.</p>';
-    return '<div class="tree-wrap' + (large ? " large" : "") + (vanish ? " vanish" : "") + '">' +
+      ? '<span class="next-cap">Fim</span>'
+      : '<canvas class="tree-next" data-week="' + next + '" width="72" height="56" aria-label="Próxima etapa, coberta de preto"></canvas>';
+    return '<div class="art">' +
+      '<div class="tree-wrap' + (vanish ? " vanish" : "") + '">' +
       oldCanvas +
       '<div class="tree-sway"><canvas class="tree-canvas live" data-week="' + week + '"></canvas></div></div>' +
-      '<p class="tree-name">' + esc(tree.name) + "</p>" +
-      preview;
+      '<div class="art-meta"><p class="tree-name">' + esc(tree.name) + "</p>" + preview + "</div></div>";
   }
 
   function home() {
@@ -217,21 +217,15 @@
     var broke = state.broke && st !== "done"
       ? '<p class="note">A sequência zerou. A maior foi ' + esc(dayWord(state.best)) + ". A semente recomeça.</p>"
       : "";
-    var verse = verseToday();
     return top() +
       '<main class="stage">' +
-      treeBlock(state.streak || 0, false) +
+      treeBlock(state.streak || 0) +
       "<h1>M 6:33</h1>" +
       '<p class="sub">Medite na Palavra antes do que distrai.</p>' +
-      '<section class="card"><div class="card-icon">' + cal() + "</div><div>" +
-      '<div class="kicker">Hoje, ' + esc(prettyDate(todayKey())) + "</div>" +
-      "<strong>" + esc(cardTitle) + "</strong></div></section>" +
-      '<p class="meta">Sequência: <strong>' + esc(dayWord(state.streak || 0)) + "</strong> · Maior: <strong>" + esc(dayWord(state.best || 0)) + "</strong></p>" +
+      '<p class="meta">' + esc(prettyDate(todayKey())) + " · " + esc(cardTitle) + "</p>" +
+      '<p class="meta">Sequência <strong>' + esc(dayWord(state.streak || 0)) + "</strong> · Maior <strong>" + esc(dayWord(state.best || 0)) + "</strong></p>" +
       broke +
       button +
-      '<section class="verse"><div class="verse-label">Palavra do dia</div>' +
-      "<blockquote>“" + esc(verse.text) + "”</blockquote>" +
-      '<p class="ref">' + esc(verse.ref) + "</p></section>" +
       "</main>" + nav("home") + mascot();
   }
 
@@ -264,34 +258,26 @@
       ["5 anos", "1.825 dias seguidos"],
       ["10 anos", "3.650 dias seguidos"]
     ].map(function (row) {
-      return "<li><b>" + esc(row[0]) + "</b><span>" + esc(row[1]) + ". A festa fica maior a cada marco.</span></li>";
+      return "<li><b>" + esc(row[0]) + "</b><span>" + esc(row[1]) + "</span></li>";
     }).join("");
     return top() +
       '<main class="stage">' +
-      treeBlock(streak, true) +
+      treeBlock(streak) +
       "<h1>" + esc(dayWord(streak)) + "</h1>" +
-      '<p class="sub">Maior sequência: ' + esc(dayWord(state.best || 0)) + ". A cada semana de leitura a árvore muda, por dois anos, até a Árvore Iluminada. Se um dia ficar sem leitura, a sequência e a árvore recomeçam. A maior sequência continua guardada.</p>" +
-      '<p class="note">Faltam ' + esc(left) + " dias para " + esc(next.label) + ".</p>" +
-      '<p class="group-label">Quando a mensagem chega</p>' +
+      '<p class="sub">Maior: ' + esc(dayWord(state.best || 0)) + ". Faltam " + esc(left) + " dias para " + esc(next.label) + ".</p>" +
       '<ul class="milestones">' + marks + "</ul>" +
-      '<p class="prose">A pergunta volta todo dia, à meia-noite, mesmo que a sequência continue. A sequência só zera se um dia passar sem o sim verdadeiro.</p>' +
       "</main>" + nav("progress") + mascot();
   }
 
   function about() {
     return top() +
       '<main class="stage"><div class="prose">' +
-      "<h1 style=\"text-align:left;margin-left:0\">Sobre</h1>" +
-      "<p>O nome <b>M 6:33</b> é o versículo 33 do capítulo 6 do Evangelho de Mateus.</p>" +
+      "<h1>Sobre</h1>" +
+      "<p>O nome <b>M 6:33</b> é o versículo 33 do capítulo 6 de Mateus.</p>" +
       "<blockquote>“Mas buscai primeiro o reino de Deus, e a sua justiça, e todas estas coisas vos serão acrescentadas.”</blockquote>" +
       "<p class=\"ref\">Mateus 6.33</p>" +
-      "<p>O app leva esse nome porque a Palavra vem primeiro. Antes dos apps que você escolheu, uma pergunta: você já meditou na Bíblia hoje?</p>" +
-      "<p>O dia é o dia do calendário deste celular, da meia-noite até a próxima. Não é uma janela de 24 horas. Leu às 8h ou às 23h50, no dia seguinte a pergunta volta.</p>" +
-      "<p>Sim e sim de novo contam o dia e somam a sequência. Se um dia ficar de fora, a sequência zera. A maior sequência fica guardada. Semana, mês, semestre, ano, 5 anos e 10 anos têm uma mensagem, cada uma mais celebrada que a anterior.</p>" +
-      "<p>Tudo fica neste aparelho. O protótipo não pede internet para funcionar depois de aberto, e não envia a sua leitura para lugar nenhum.</p>" +
-      "<p>Este protótipo ainda não cobre o Instagram de verdade. No Android, isso pede permissões do sistema. Aqui você percorre a pergunta, o silêncio e a árvore. Para ver a sequência crescer, use Ajustes e avance um dia, depois responda de novo.</p>" +
-      "<p>App da Bíblia escolhido: " + esc(state.bibleApp || "nenhum") + ".<br>Apps da pergunta: " + esc((state.intercept || []).join(", ") || "nenhum") + ".</p>" +
-      "</div></main>" + nav("about");
+      "<p>A Palavra vem primeiro. A pergunta volta à meia-noite, e tudo fica neste celular.</p>" +
+      "</div></main>" + nav("about") + mascot();
   }
 
   function onboarding() {
@@ -354,7 +340,7 @@
     var titleSize = Math.round(28 + score * 5);
     return '<div class="overlay cele cele-' + esc(m.id) + wild + '">' +
       '<p class="eyebrow">Parabéns</p>' +
-      treeBlock(m.streak, true) +
+      treeBlock(m.streak) +
       '<h2 style="font-size:' + titleSize + 'px">' + esc(titles[m.id]) + "</h2>" +
       '<p class="lead comic">' + comicLine(m.message, score) + "</p>" +
       '<div class="actions"><button class="gold" data-act="close">Continuar</button></div></div>';
@@ -479,7 +465,7 @@
   function talkBubble() {
     if (!bubble) return "";
     var item = SAYINGS[(state.talk || 0) % SAYINGS.length];
-    return '<div class="bubble"><p class="kicker">' + esc(item.kind) + "</p><p>" + esc(item.text) + '</p><p class="ref">' + esc(item.ref) + '</p><button class="gold" data-act="mascot">Outro versículo</button><button class="line" data-act="close-talk">Fechar</button></div>';
+    return '<div class="say" data-act="mascot"><p class="kicker">' + esc(item.kind) + "</p><p>" + esc(item.text) + '</p><p class="ref">' + esc(item.ref) + "</p></div>";
   }
 
   var punched = {};
@@ -701,6 +687,11 @@
 
   root.addEventListener("click", function (event) {
     var el = event.target.closest("[data-act]");
+    var inTalk = event.target.closest(".say, .mascot-btn");
+    if (bubble && !inTalk) {
+      bubble = false;
+      if (!el) { render(); return; }
+    }
     if (!el) return;
     var act = el.getAttribute("data-act");
     if (act === "slide") {
