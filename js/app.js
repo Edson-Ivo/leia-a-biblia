@@ -194,18 +194,25 @@
     var oldCanvas = vanish
       ? '<canvas class="tree-canvas old" data-week="' + seen + '"></canvas>'
       : "";
+    var home = showNext !== false && withMascot !== false;
     var preview = "";
-    if (showNext !== false) {
-      preview = next === null
-        ? '<p class="next-cap">Árvore Iluminada</p>'
-        : '<div class="next-sway"><canvas class="tree-next" data-week="' + next + '" width="120" height="88" aria-label="Próxima etapa, coberta de preto"></canvas></div>';
+    if (showNext !== false && next !== null) {
+      var caption = home
+        ? '<p class="next-line"><svg width="14" height="16" viewBox="0 0 14 16" aria-hidden="true"><path d="M7 1v11M7 12 3 8.2M7 12l4-3.8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg> Próxima etapa será</p>'
+        : "";
+      preview = caption + '<canvas class="tree-next" data-week="' + next + '" width="120" height="88" aria-label="Próxima etapa, coberta de preto"></canvas>';
     }
     var buddy = withMascot === false ? "" : mascot();
-    return '<div class="art">' + buddy +
+    var phase = home
+      ? '<p class="phase">Você está na fase <strong>' + esc(tree.name) + "</strong></p>"
+      : "";
+    var name = home ? "" : '<p class="tree-name">' + esc(tree.name) + "</p>";
+    return '<div class="art">' + phase +
+      '<div class="tree-row">' + buddy +
       '<div class="tree-wrap' + (vanish ? " vanish" : "") + '">' +
       oldCanvas +
-      '<div class="tree-sway"><canvas class="tree-canvas live" data-week="' + week + '"></canvas></div></div>' +
-      '<p class="tree-name">' + esc(tree.name) + "</p>" +
+      '<div class="tree-sway"><canvas class="tree-canvas live" data-week="' + week + '"></canvas></div></div></div>' +
+      name +
       preview +
       "</div>";
   }

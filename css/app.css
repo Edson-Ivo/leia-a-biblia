@@ -142,6 +142,28 @@ h1 {
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
+.phase {
+  margin: 0 12px 2px;
+  text-align: center;
+  font-size: 16px;
+  line-height: 1.2;
+}
+.phase strong {
+  display: block;
+  margin-top: 1px;
+  color: var(--green);
+  font-size: 24px;
+  letter-spacing: -0.03em;
+}
+.next-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin: 8px 0 2px;
+  color: var(--muted);
+  font-size: 13px;
+}
 
 .card {
   display: flex;
@@ -311,11 +333,14 @@ blockquote {
   animation: float 3.4s ease-in-out infinite;
 }
 .art {
-  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 0 16px;
+}
+.tree-row {
+  position: relative;
+  width: 100%;
 }
 .tree-wrap {
   position: relative;
@@ -327,24 +352,17 @@ blockquote {
   position: absolute;
   inset: 0;
 }
-.tree-sway, .next-sway {
+.tree-sway {
   animation: sway 2.4s ease-in-out infinite;
   transform-origin: 50% 100%;
 }
 .tree-canvas { width: 100%; height: 100%; display: block; }
-.next-sway { width: 86px; height: 64px; margin: 10px auto 0; }
 .tree-next {
   display: block;
   width: 86px;
   height: 64px;
   background: #efe8dc;
   border-radius: 12px;
-}
-.next-cap {
-  display: block;
-  margin-top: 4px;
-  color: var(--muted);
-  font-size: 11px;
 }
 .vanish .old { opacity: 1; }
 .vanish .live { opacity: 0; }
