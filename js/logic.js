@@ -13,17 +13,17 @@
   var MAX_WEEK = 104;
   var TREES = [
     { week: 0, file: "tree-00-semente.jpg", name: "Semente" },
-    { week: 4, file: "tree-01-broto.jpg", name: "Broto" },
-    { week: 8, file: "tree-c02-botao.jpg", name: "Botão" },
-    { week: 12, file: "tree-c03-flores.jpg", name: "Flores" },
-    { week: 18, file: "tree-c04-rosa.jpg", name: "Florada rosa" },
-    { week: 26, file: "tree-c05-violeta.jpg", name: "Violeta" },
-    { week: 36, file: "tree-c06-frutos.jpg", name: "Primeiros frutos" },
-    { week: 46, file: "tree-c07-pomar.jpg", name: "Pomar" },
-    { week: 56, file: "tree-c08-vermelho.jpg", name: "Flores e frutos" },
-    { week: 66, file: "tree-c09-ouro.jpg", name: "Copa de ouro" },
-    { week: 76, file: "tree-c10-lanternas.jpg", name: "Lanternas" },
-    { week: 88, file: "tree-c11-crepusculo.jpg", name: "Crepúsculo" },
+    { week: 1, file: "tree-01-broto.jpg", name: "Broto" },
+    { week: 2, file: "tree-c02-botao.jpg", name: "Botão" },
+    { week: 4, file: "tree-c03-flores.jpg", name: "Flores" },
+    { week: 7, file: "tree-c04-rosa.jpg", name: "Florada rosa" },
+    { week: 11, file: "tree-c05-violeta.jpg", name: "Violeta" },
+    { week: 16, file: "tree-c06-frutos.jpg", name: "Primeiros frutos" },
+    { week: 22, file: "tree-c07-pomar.jpg", name: "Pomar" },
+    { week: 30, file: "tree-c08-vermelho.jpg", name: "Flores e frutos" },
+    { week: 40, file: "tree-c09-ouro.jpg", name: "Copa de ouro" },
+    { week: 52, file: "tree-c10-lanternas.jpg", name: "Lanternas" },
+    { week: 68, file: "tree-c11-crepusculo.jpg", name: "Crepúsculo" },
     { week: 104, file: "tree-c12-iluminada.jpg", name: "Árvore Iluminada" }
   ];
 
@@ -61,6 +61,7 @@
       silenceDate: null,
       theme: "auto",
       lastSeenWeek: null,
+      lastSeenStreak: null,
       talk: 0
     };
   }
@@ -227,6 +228,24 @@
     return treeForWeek(weekOf(streak));
   }
 
+  function growthFor(streak) {
+    var safe = Math.max(0, streak || 0);
+    var place = stageForWeek(weekOf(safe));
+    var start = place.stage.week * 7;
+    var end = place.next ? place.next.week * 7 : (MAX_WEEK + 1) * 7;
+    var span = Math.max(1, end - start);
+    var day = safe - start;
+    if (day < 0) day = 0;
+    if (day > span - 1) day = span - 1;
+    return {
+      stage: place.stage,
+      next: place.next,
+      day: day,
+      span: span,
+      amount: span <= 1 ? 0 : day / (span - 1)
+    };
+  }
+
   function silenceFits(minutes, maxMinutes) {
     return minutes >= 1 && minutes <= maxMinutes;
   }
@@ -247,6 +266,7 @@
     weekOf: weekOf,
     treeForWeek: treeForWeek,
     stageForWeek: stageForWeek,
+    growthFor: growthFor,
     silenceFits: silenceFits,
     dateKey: dateKey,
     parseKey: parseKey,

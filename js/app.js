@@ -189,32 +189,40 @@
     return ' style="animation-delay:' + (-(Date.now() % period)) + 'ms"';
   }
 
+  function seenStreak() {
+    if (state.lastSeenStreak !== null && state.lastSeenStreak !== undefined) return state.lastSeenStreak;
+    if (state.lastSeenWeek !== null && state.lastSeenWeek !== undefined) return state.lastSeenWeek * 7;
+    return null;
+  }
+
   function treeBlock(streak, where) {
-    var week = L.weekOf(streak);
-    var place = L.stageForWeek(week);
-    var tree = place.stage;
-    var seen = state.lastSeenWeek;
-    var seenPlace = seen === null || seen === undefined ? null : L.stageForWeek(seen);
-    var vanish = seenPlace && seenPlace.stage.week !== place.stage.week;
-    var next = place.next;
+    var safe = streak || 0;
+    var growth = L.growthFor(safe);
+    var tree = growth.stage;
+    var seen = seenStreak();
+    var seenGrowth = seen === null ? null : L.growthFor(seen);
+    var vanish = seenGrowth && seenGrowth.stage.week !== growth.stage.week;
+    var next = growth.next;
     var oldLayer = vanish
-      ? '<div class="tree-phase old"><canvas class="tree-canvas old" data-week="' + seen + '"></canvas></div>'
+      ? '<div class="tree-phase old"><canvas class="tree-canvas old" data-streak="' + seen + '"></canvas></div>'
       : "";
     var preview = "";
     if (where === "progress" && next) {
-      preview = '<p class="next-line"><svg width="14" height="16" viewBox="0 0 14 16" aria-hidden="true"><path d="M7 1v11M7 12 3 8.2M7 12l4-3.8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg> Próxima etapa será</p>' +
-        '<canvas class="tree-next" data-week="' + next.week + '" width="120" height="88" aria-label="Próxima etapa, coberta de preto"></canvas>';
+      preview = '<div class="next-block"><p class="next-line"><svg width="14" height="16" viewBox="0 0 14 16" aria-hidden="true"><path d="M7 1v11M7 12 3 8.2M7 12l4-3.8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg> Próxima etapa</p>' +
+        '<canvas class="tree-next" data-streak="' + (next.week * 7) + '" width="120" height="88" aria-label="Próxima etapa, coberta de preto"></canvas></div>';
     }
     var buddy = where === "celebrate" ? "" : mascot();
     var phase = where === "home"
       ? '<p class="phase">Você está na fase <strong>' + esc(tree.name) + "</strong></p>"
-      : "";
-    var name = where === "home" ? "" : '<p class="tree-name">' + esc(tree.name) + "</p>";
+      : where === "progress"
+        ? '<p class="phase progress-name"><strong>' + esc(tree.name) + "</strong></p>"
+        : "";
+    var name = where === "home" || where === "progress" ? "" : '<p class="tree-name">' + esc(tree.name) + "</p>";
     return '<div class="art">' + phase +
       '<div class="tree-row">' + buddy +
       '<div class="tree-wrap' + (vanish ? " vanish" : "") + '"><div class="tree-sway"' + motionStyle(2400) + ">" +
       oldLayer +
-      '<div class="tree-phase live"><canvas class="tree-canvas live" data-week="' + week + '"></canvas></div>' +
+      '<div class="tree-phase live"><canvas class="tree-canvas live" data-streak="' + safe + '"></canvas></div>' +
       "</div></div></div>" +
       name +
       preview +
@@ -250,23 +258,6 @@
       "</main>" + nav("home");
   }
 
-  function nextMark(streak) {
-    var steps = [
-      { step: 7, label: "a próxima semana" },
-      { step: 30, label: "o próximo mês" },
-      { step: 180, label: "o próximo semestre" },
-      { step: 365, label: "o próximo ano" },
-      { step: 1825, label: "os próximos 5 anos" },
-      { step: 3650, label: "os próximos 10 anos" }
-    ];
-    var best = null;
-    steps.forEach(function (item) {
-      var days = (Math.floor(streak / item.step) + 1) * item.step;
-      if (!best || days < best.days) best = { days: days, label: item.label };
-    });
-    return best;
-  }
-
   function markIcon(id) {
     var common = 'width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"';
     if (id === "semana") return "<svg " + common + '><path d="M5 19V10M12 19V5M19 19v-7"/></svg>';
@@ -279,8 +270,6 @@
 
   function progress() {
     var streak = state.streak || 0;
-    var next = nextMark(streak);
-    var left = next.days - streak;
     var marks = [
       ["semana", "Semana", "7 dias seguidos"],
       ["mes", "Mês", "30 dias seguidos"],
@@ -294,8 +283,8 @@
     return top() +
       '<main class="stage progress">' +
       treeBlock(streak, "progress") +
-      "<h1>" + esc(dayWord(streak)) + "</h1>" +
-      '<p class="sub">Maior: ' + esc(dayWord(state.best || 0)) + ". Faltam " + esc(left) + " dias para " + esc(next.label) + ".</p>" +
+      '<h1 class="days">' + esc(dayWord(streak)) + "</h1>" +
+      '<div class="best"><span class="best-ico">' + markIcon("5a") + "</span><div><span>Maior sequência</span><b>" + esc(dayWord(state.best || 0)) + "</b></div></div>" +
       '<ul class="milestones">' + marks + "</ul>" +
       "</main>" + nav("progress");
   }
@@ -509,7 +498,7 @@
 
   function paintTrees() {
     var weekNow = L.weekOf(state.streak || 0);
-    var canvases = Array.prototype.slice.call(root.querySelectorAll("canvas[data-week]"));
+    var canvases = Array.prototype.slice.call(root.querySelectorAll("canvas[data-streak]"));
     var left = canvases.length;
     function done() {
       left -= 1;
@@ -523,21 +512,25 @@
       });
     }
     canvases.forEach(function (canvas) {
-      drawWeek(canvas, Number(canvas.getAttribute("data-week")), canvas.classList.contains("tree-next"), done);
+      drawWeek(canvas, Number(canvas.getAttribute("data-streak")), canvas.classList.contains("tree-next"), done);
     });
-    if (state.lastSeenWeek !== weekNow) {
-      var seenPlace = state.lastSeenWeek == null ? null : L.stageForWeek(state.lastSeenWeek);
-      var stageChanged = seenPlace && seenPlace.stage.week !== L.stageForWeek(weekNow).stage.week;
+    var streakNow = state.streak || 0;
+    if (state.lastSeenWeek !== weekNow || state.lastSeenStreak !== streakNow) {
+      var seen = seenStreak();
+      var seenGrowth = seen === null ? null : L.growthFor(seen);
+      var stageChanged = seenGrowth && seenGrowth.stage.week !== L.growthFor(streakNow).stage.week;
       window.setTimeout(function () {
         state.lastSeenWeek = weekNow;
+        state.lastSeenStreak = streakNow;
         save();
       }, stageChanged ? 1500 : 0);
     }
   }
 
-  function drawWeek(canvas, week, silhouette, done) {
-    var tree = L.treeForWeek(week);
-    var key = tree.file + ":" + week + ":" + (silhouette ? "b" : "c");
+  function drawWeek(canvas, streak, silhouette, done) {
+    var growth = L.growthFor(streak);
+    var tree = growth.stage;
+    var key = tree.file + ":" + (silhouette ? "base" : growth.day) + ":" + (silhouette ? "b" : "c");
     if (treeCache[key]) {
       paintCached(canvas, treeCache[key]);
       if (done) done();
@@ -568,7 +561,7 @@
         if (nearWhite || cream) px[i + 3] = 0;
       }
       ctx.putImageData(pixels, 0, 0);
-      if (!silhouette) growWeek(ctx, w, h, week);
+      if (!silhouette) growWeek(ctx, w, h, growth);
       var framed = cropOpaque(off);
       if (silhouette) {
         var cover = framed.getContext("2d");
@@ -636,17 +629,19 @@
     return cropped;
   }
 
-  function growWeek(ctx, w, h, week) {
-    var place = L.stageForWeek(week);
-    if (!place.step) return;
+  function growWeek(ctx, w, h, growth) {
+    var level = growth.stage.name === "Semente" ? (growth.day <= 1 ? 0 : growth.day - 1) : 0;
+    var amount = growth.stage.name === "Semente" ? 0 : growth.amount;
+    if (growth.stage.name === "Semente" && !level) return;
+    if (growth.stage.name !== "Semente" && amount <= 0) return;
     var box = opaqueBox(ctx, w, h);
     if (!box) return;
     var cx = (box.l + box.r) / 2;
     var top = box.t + (box.b - box.t) * 0.06;
     var bh = box.b - box.t;
     ctx.save();
-    if (place.stage.name === "Semente") drawFromSeed(ctx, cx, top, bh, place.step);
-    else drawFromCrown(ctx, cx, top, bh, place.step, place.stage.name);
+    if (growth.stage.name === "Semente") drawFromSeed(ctx, cx, top, bh, level);
+    else drawFromCrown(ctx, cx, top, bh, amount, growth.stage.name);
     ctx.restore();
   }
 
@@ -699,32 +694,33 @@
   }
 
   function drawFromSeed(ctx, x, y, bh, step) {
-    ctx.fillStyle = "#5c3a24";
-    ctx.beginPath();
-    ctx.ellipse(x, y + bh * 0.08, bh * 0.05, bh * 0.025, 0, 0, Math.PI * 2);
-    ctx.fill();
-    if (step < 1) return;
-    var height = bh * (step === 1 ? 0.16 : step === 2 ? 0.4 : 0.68);
-    var width = Math.max(10, bh * 0.045);
+    var height = bh * [0.14, 0.28, 0.42, 0.56, 0.72][step - 1];
+    var width = Math.max(10, bh * 0.04);
+    if (step === 1) {
+      ctx.fillStyle = "#5c3a24";
+      ctx.beginPath();
+      ctx.ellipse(x, y + bh * 0.05, bh * 0.045, bh * 0.02, 0, 0, Math.PI * 2);
+      ctx.fill();
+    }
     stem(ctx, x, y, height, width);
     if (step === 1) {
       ctx.fillStyle = "#3e7a45";
       ctx.beginPath();
-      ctx.ellipse(x, y - height, width * 1.15, width * 0.8, 0, 0, Math.PI * 2);
+      ctx.ellipse(x, y - height, width * 1.2, width * 0.85, 0, 0, Math.PI * 2);
       ctx.fill();
       return;
     }
-    var leafW = bh * (step === 2 ? 0.11 : 0.16);
-    var leafH = leafW * 1.7;
-    leaf(ctx, x - leafW * 0.85, y - height + leafH * 0.15, leafW, leafH, -0.7, "#3e7a45");
+    var leafW = bh * (0.08 + step * 0.018);
+    var leafH = leafW * 1.65;
+    leaf(ctx, x - leafW * 0.8, y - height + leafH * 0.1, leafW, leafH, -0.65, "#3e7a45");
     if (step >= 3) {
-      leaf(ctx, x + leafW * 0.85, y - height + leafH * 0.2, leafW * 0.92, leafH * 0.92, 0.65, "#2f6a38");
+      leaf(ctx, x + leafW * 0.85, y - height + leafH * 0.16, leafW * 0.9, leafH * 0.9, 0.6, "#2f6a38");
     }
   }
 
-  function drawFromCrown(ctx, x, y, bh, step, name) {
-    var n = Math.min(step, 6);
-    var height = bh * (0.08 + n * 0.07);
+  function drawFromCrown(ctx, x, y, bh, amount, name) {
+    var n = Math.max(1, Math.round(amount * 5));
+    var height = bh * (0.1 + amount * 0.48);
     var width = Math.max(8, bh * 0.03);
     var fruit = name.indexOf("fruto") !== -1 || name === "Pomar" || name === "Copa de ouro";
     var flower = name === "Botão" || name === "Flores" || name === "Florada rosa" || name === "Violeta";
