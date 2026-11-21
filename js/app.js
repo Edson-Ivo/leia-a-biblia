@@ -178,14 +178,18 @@
   function mascot() {
     var label = status() === "silent" ? "Boneco desconfiado. Ouvir um versículo" : "Boneco. Ouvir um versículo";
     return '<div class="pal">' + talkBubble() +
-      '<button class="mascot-btn" data-act="mascot" aria-label="' + esc(label) + '"><img src="' + asset(mascotFile()) + '" alt=""></button></div>';
+      '<button class="mascot-btn" data-act="mascot" aria-label="' + esc(label) + '"><img src="' + asset(mascotFile()) + '" alt=""' + motionStyle(3400) + "></button></div>";
   }
 
   function top() {
     return '<header class="top"><button class="icon-btn" data-act="settings" aria-label="Ajustes">' + gear() + "</button></header>";
   }
 
-  function treeBlock(streak, showNext, withMascot) {
+  function motionStyle(period) {
+    return ' style="animation-delay:' + (-(Date.now() % period)) + 'ms"';
+  }
+
+  function treeBlock(streak, where) {
     var week = L.weekOf(streak);
     var place = L.stageForWeek(week);
     var tree = place.stage;
@@ -196,22 +200,19 @@
     var oldLayer = vanish
       ? '<div class="tree-phase old"><canvas class="tree-canvas old" data-week="' + seen + '"></canvas></div>'
       : "";
-    var home = showNext !== false && withMascot !== false;
     var preview = "";
-    if (showNext !== false && next) {
-      var caption = home
-        ? '<p class="next-line"><svg width="14" height="16" viewBox="0 0 14 16" aria-hidden="true"><path d="M7 1v11M7 12 3 8.2M7 12l4-3.8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg> Próxima etapa será</p>'
-        : "";
-      preview = caption + '<canvas class="tree-next" data-week="' + next.week + '" width="120" height="88" aria-label="Próxima etapa, coberta de preto"></canvas>';
+    if (where === "progress" && next) {
+      preview = '<p class="next-line"><svg width="14" height="16" viewBox="0 0 14 16" aria-hidden="true"><path d="M7 1v11M7 12 3 8.2M7 12l4-3.8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg> Próxima etapa será</p>' +
+        '<canvas class="tree-next" data-week="' + next.week + '" width="120" height="88" aria-label="Próxima etapa, coberta de preto"></canvas>';
     }
-    var buddy = withMascot === false ? "" : mascot();
-    var phase = home
+    var buddy = where === "celebrate" ? "" : mascot();
+    var phase = where === "home"
       ? '<p class="phase">Você está na fase <strong>' + esc(tree.name) + "</strong></p>"
       : "";
-    var name = home ? "" : '<p class="tree-name">' + esc(tree.name) + "</p>";
+    var name = where === "home" ? "" : '<p class="tree-name">' + esc(tree.name) + "</p>";
     return '<div class="art">' + phase +
       '<div class="tree-row">' + buddy +
-      '<div class="tree-wrap' + (vanish ? " vanish" : "") + '"><div class="tree-sway">' +
+      '<div class="tree-wrap' + (vanish ? " vanish" : "") + '"><div class="tree-sway"' + motionStyle(2400) + ">" +
       oldLayer +
       '<div class="tree-phase live"><canvas class="tree-canvas live" data-week="' + week + '"></canvas></div>' +
       "</div></div></div>" +
@@ -236,12 +237,14 @@
       : "";
     var word = VERSES.filter(function (item) { return item.ref.indexOf("Timóteo") !== -1; })[0];
     return top() +
-      '<main class="stage">' +
-      treeBlock(state.streak || 0) +
+      '<main class="stage home">' +
+      treeBlock(state.streak || 0, "home") +
       '<h1 class="verse-title">“' + esc(word.text) + '”</h1>' +
       '<p class="ref">' + esc(word.ref) + "</p>" +
+      '<div class="home-meta">' +
       '<p class="meta">' + esc(prettyDate(todayKey())) + " · " + esc(cardTitle) + "</p>" +
       '<p class="meta">Sequência <strong>' + esc(dayWord(state.streak || 0)) + "</strong> · Maior <strong>" + esc(dayWord(state.best || 0)) + "</strong></p>" +
+      "</div>" +
       broke +
       button +
       "</main>" + nav("home");
@@ -289,8 +292,8 @@
       return '<li><span class="mark-ico">' + markIcon(row[0]) + "</span><div><b>" + esc(row[1]) + "</b><span>" + esc(row[2]) + "</span></div></li>";
     }).join("");
     return top() +
-      '<main class="stage">' +
-      treeBlock(streak, false) +
+      '<main class="stage progress">' +
+      treeBlock(streak, "progress") +
       "<h1>" + esc(dayWord(streak)) + "</h1>" +
       '<p class="sub">Maior: ' + esc(dayWord(state.best || 0)) + ". Faltam " + esc(left) + " dias para " + esc(next.label) + ".</p>" +
       '<ul class="milestones">' + marks + "</ul>" +
@@ -373,7 +376,7 @@
     var titleSize = Math.round(28 + score * 5);
     return '<div class="overlay cele cele-' + esc(m.id) + wild + '">' +
       '<p class="eyebrow">Parabéns</p>' +
-      treeBlock(m.streak, true, false) +
+      treeBlock(m.streak, "celebrate") +
       '<h2 style="font-size:' + titleSize + 'px">' + esc(titles[m.id]) + "</h2>" +
       '<p class="lead comic">' + comicLine(m.message, score) + "</p>" +
       '<div class="actions"><button class="gold" data-act="close">Continuar</button></div></div>';

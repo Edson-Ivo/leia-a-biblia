@@ -127,6 +127,10 @@ h1 {
   line-height: 1.35;
   letter-spacing: 0;
 }
+.stage.home .verse-title { margin-top: 28px; }
+.stage.home .ref { margin-top: 12px; }
+.stage.home .home-meta { margin-top: 28px; }
+.stage.home .gold { margin-top: 28px; }
 .sub {
   margin: 4px 28px 8px;
   text-align: center;
@@ -366,7 +370,9 @@ blockquote {
   height: 64px;
   background: #efe8dc;
   border-radius: 12px;
+  animation: none;
 }
+.next-line { animation: none; }
 .vanish .tree-phase.old { opacity: 1; transform: scale(1); }
 .vanish .tree-phase.live { opacity: 0; transform: scale(0.42); }
 .vanish.play .tree-phase.old { animation: stageOut 1.35s ease-in forwards; }
@@ -537,6 +543,11 @@ blockquote {
 .gallery .here img { border-color: var(--gold); }
 .gallery figcaption { font-size: 12px; color: var(--muted); margin-top: 4px; }
 
+.stage.progress .tree-wrap { height: 84px; }
+.stage.progress .tree-next { width: 68px; height: 48px; }
+.stage.progress .next-line { margin-top: 2px; }
+.stage.progress .milestones li { padding: 3px 0; }
+.stage.progress h1 { margin-top: 0; }
 .milestones {
   margin: 4px 18px 0;
   padding: 0;
