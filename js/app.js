@@ -284,7 +284,7 @@
       '<main class="stage progress">' +
       treeBlock(streak, "progress") +
       '<h1 class="days">' + esc(dayWord(streak)) + "</h1>" +
-      '<div class="best"><span class="best-ico">' + markIcon("5a") + "</span><div><span>Maior sequência</span><b>" + esc(dayWord(state.best || 0)) + "</b></div></div>" +
+      '<div class="best"><span class="mark-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M4 18 12 6l8 12"/><path d="M4 18h16"/></svg></span><div><span>Maior sequência</span><b>' + esc(dayWord(state.best || 0)) + "</b></div></div>" +
       '<ul class="milestones">' + marks + "</ul>" +
       "</main>" + nav("progress");
   }

@@ -563,17 +563,8 @@ blockquote {
   background: var(--card);
   border-radius: 16px;
 }
-.best-ico {
-  width: 36px;
-  height: 36px;
-  flex: 0 0 auto;
-  display: grid;
-  place-items: center;
-  border-radius: 12px;
-  background: var(--white);
-  color: var(--green);
-}
-.best span { display: block; color: var(--muted); font-size: 13px; }
+.best .mark-ico { color: var(--green); }
+.best span:not(.mark-ico) { display: block; color: var(--muted); font-size: 13px; }
 .best b { display: block; margin-top: 2px; font-size: 20px; letter-spacing: -0.03em; }
 .stage.progress .milestones { margin-top: 14px; }
 .milestones {
