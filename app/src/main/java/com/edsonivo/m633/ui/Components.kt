@@ -246,7 +246,7 @@ fun Character(
             painter = painterResource(image),
             contentDescription = "Personagem. Toque para ouvir uma mensagem.",
             modifier = Modifier
-                .size(76.dp)
+                .size(72.dp)
                 .graphicsLayer { translationY = dy * density }
                 .clip(CircleShape)
                 .clickable(onClick = onTap),

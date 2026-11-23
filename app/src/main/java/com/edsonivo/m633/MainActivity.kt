@@ -305,6 +305,7 @@ private fun MainTabs(screen: Screen, tick: Int, onScreen: (Screen) -> Unit) {
     var gateOpen by remember { mutableStateOf(false) }
     var silenceOpen by remember { mutableStateOf(false) }
     var bubbleOpen by remember { mutableStateOf(false) }
+    var talkShown by remember { mutableIntStateOf(state.talkIndex) }
 
     Column(Modifier.fillMaxSize()) {
         Row(
@@ -336,20 +337,18 @@ private fun MainTabs(screen: Screen, tick: Int, onScreen: (Screen) -> Unit) {
                         onEndSilence = { store.update(DayRules::endSilence); GuardService.wake() },
                         onFixPermissions = { onScreen(Screen.SETTINGS) },
                     )
-                    val message = bank.forTalk(state.talkIndex)
+                    val message = bank.forTalk(talkShown)
                     Character(
                         status = status,
                         message = message,
                         themeLabel = bank.themeLabel(message.theme),
                         open = bubbleOpen,
                         onTap = {
-                            if (bubbleOpen) store.update { it.copy(talkIndex = it.talkIndex + 1) }
+                            talkShown = store.state.value.talkIndex
+                            store.update { it.copy(talkIndex = it.talkIndex + 1) }
                             bubbleOpen = true
                         },
-                        onCloseBubble = {
-                            bubbleOpen = false
-                            store.update { it.copy(talkIndex = it.talkIndex + 1) }
-                        },
+                        onCloseBubble = { bubbleOpen = false },
                         modifier = Modifier.align(Alignment.BottomStart).padding(start = 14.dp, end = 60.dp, bottom = 6.dp),
                     )
                 }

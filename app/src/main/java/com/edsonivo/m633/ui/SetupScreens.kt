@@ -1,6 +1,5 @@
 package com.edsonivo.m633.ui
 
-import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -208,9 +207,9 @@ fun SettingsScreen(
 
             SectionTitle("Leitura mínima por dia")
             Muted("Conferimos o tempo real que o app da Bíblia ficou aberto hoje.", size = 13, align = TextAlign.Start)
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.padding(top = 8.dp)) {
+            Row(horizontalArrangement = Arrangement.spacedBy(6.dp), modifier = Modifier.padding(top = 8.dp)) {
                 listOf(1, 3, 5, 10, 15).forEach { m ->
-                    FilterChip(selected = state.minReadMinutes == m, onClick = { onMinMinutes(m) }, label = { Text("$m min") })
+                    FilterChip(selected = state.minReadMinutes == m, onClick = { onMinMinutes(m) }, label = { Text("$m min", fontSize = 13.sp, maxLines = 1, softWrap = false) })
                 }
             }
 
@@ -237,5 +236,3 @@ fun SettingsScreen(
         }
     }
 }
-
-fun Intent.withNewTask(): Intent = addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)

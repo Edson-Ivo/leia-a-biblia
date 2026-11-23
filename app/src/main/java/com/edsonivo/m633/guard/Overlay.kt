@@ -35,8 +35,6 @@ class Overlay(private val service: GuardService) {
     fun show() {
         if (root != null || !Settings.canDrawOverlays(service)) return
         val compose = ComposeView(service).apply {
-            setViewTreeLifecycleOwner(service)
-            setViewTreeSavedStateRegistryOwner(service)
             setContent {
                 val state by service.app.store.state.collectAsState()
                 M633Theme(state.theme) {
@@ -57,6 +55,8 @@ class Overlay(private val service: GuardService) {
                 return super.dispatchKeyEvent(event)
             }
         }
+        frame.setViewTreeLifecycleOwner(service)
+        frame.setViewTreeSavedStateRegistryOwner(service)
         frame.addView(compose)
         val params = WindowManager.LayoutParams(
             WindowManager.LayoutParams.MATCH_PARENT,

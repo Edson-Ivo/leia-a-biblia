@@ -1,7 +1,6 @@
 package com.edsonivo.m633.ui
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -238,15 +237,4 @@ fun AboutScreen(version: String) {
 private fun AboutBlock(title: String, body: String) {
     SectionTitle(title)
     Text(body, fontSize = 15.sp, lineHeight = 22.sp)
-}
-
-@Composable
-fun CelebrationText(days: Int): Pair<String, Int>? {
-    val m = Milestones.byDays(days) ?: return null
-    return Milestones.message(m) to m.tier
-}
-
-@Composable
-fun Centered(content: @Composable () -> Unit) {
-    Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) { content() }
 }
