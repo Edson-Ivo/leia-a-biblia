@@ -1,0 +1,1296 @@
+{
+ "temas": {
+  "ler": "Ler a Bíblia",
+  "orar": "Orar",
+  "igreja": "Ir à igreja",
+  "comunhao": "Comunhão e correção"
+ },
+ "mensagens": [
+  {
+   "tema": "ler",
+   "texto": "A Palavra ilumina o próximo passo, não a estrada inteira. Leia hoje o bastante para o passo de hoje.",
+   "versiculos": [
+    {
+     "ref": "Salmos 119:105",
+     "texto": "Lâmpada para os meus pés é a tua palavra, e luz para o meu caminho."
+    }
+   ]
+  },
+  {
+   "tema": "ler",
+   "texto": "Antes de ouvir mil vozes hoje, ouça a voz de quem criou você.",
+   "versiculos": [
+    {
+     "ref": "Mateus 4:4",
+     "texto": "Nem só de pão viverá o homem, mas de toda palavra que sai da boca de Deus."
+    }
+   ]
+  },
+  {
+   "tema": "ler",
+   "texto": "Meditar é mastigar devagar. Um versículo bem pensado vale mais que um capítulo corrido.",
+   "versiculos": [
+    {
+     "ref": "Josué 1:8",
+     "texto": "Não se aparte da tua boca o livro desta lei; antes, medita nele dia e noite."
+    }
+   ]
+  },
+  {
+   "tema": "ler",
+   "texto": "Feliz é quem lê a Palavra com prazer, não só por obrigação.",
+   "versiculos": [
+    {
+     "ref": "Salmos 1:1-2",
+     "texto": "Bem-aventurado o homem […] cujo prazer está na lei do Senhor, e na sua lei medita de dia e de noite."
+    }
+   ]
+  },
+  {
+   "tema": "ler",
+   "texto": "Guardar a Palavra no coração é a melhor defesa contra o pecado.",
+   "versiculos": [
+    {
+     "ref": "Salmos 119:11",
+     "texto": "Escondi a tua palavra no meu coração, para eu não pecar contra ti."
+    }
+   ]
+  },
+  {
+   "tema": "ler",
+   "texto": "A Escritura ensina, corrige e prepara você para fazer o bem.",
+   "versiculos": [
+    {
+     "ref": "2 Timóteo 3:16-17",
+     "texto": "Toda a Escritura é divinamente inspirada e proveitosa para ensinar, para redarguir, para corrigir, para instruir em justiça."
+    }
+   ]
+  },
+  {
+   "tema": "ler",
+   "texto": "Ler sem praticar é olhar no espelho e esquecer o próprio rosto.",
+   "versiculos": [
+    {
+     "ref": "Tiago 1:22",
+     "texto": "Sede cumpridores da palavra, e não somente ouvintes, enganando-vos a vós mesmos."
+    },
+    {
+     "ref": "Tiago 1:23-24",
+     "texto": "Porque, se alguém é ouvinte da palavra, e não cumpridor, é semelhante ao homem que contempla ao espelho o seu rosto natural; […] e logo se esquece de como era."
+    }
+   ]
+  },
+  {
+   "tema": "ler",
+   "texto": "Os bereanos conferiam tudo nas Escrituras, todos os dias. Faça o mesmo com o que você ouve.",
+   "versiculos": [
+    {
+     "ref": "Atos 17:11",
+     "texto": "Receberam a palavra com toda a avidez, examinando cada dia nas Escrituras se estas coisas eram assim."
+    }
+   ]
+  },
+  {
+   "tema": "ler",
+   "texto": "A Palavra é viva. Enquanto você a lê, ela lê você.",
+   "versiculos": [
+    {
+     "ref": "Hebreus 4:12",
+     "texto": "Porque a palavra de Deus é viva e eficaz, e mais penetrante do que espada alguma de dois gumes."
+    }
+   ]
+  },
+  {
+   "tema": "ler",
+   "texto": "Toda a Escritura aponta para Jesus. Leia procurando por Ele.",
+   "versiculos": [
+    {
+     "ref": "João 5:39",
+     "texto": "Examinais as Escrituras, porque vós cuidais ter nelas a vida eterna, e são elas que de mim testificam."
+    },
+    {
+     "ref": "Lucas 24:27",
+     "texto": "E, começando por Moisés, e por todos os profetas, explicava-lhes o que dele se achava em todas as Escrituras."
+    }
+   ]
+  },
+  {
+   "tema": "ler",
+   "texto": "Tudo o que foi escrito foi escrito para o seu ensino e para a sua esperança.",
+   "versiculos": [
+    {
+     "ref": "Romanos 15:4",
+     "texto": "Porque tudo que dantes foi escrito, para nosso ensino foi escrito, para que pela paciência e consolação das Escrituras tenhamos esperança."
+    }
+   ]
+  },
+  {
+   "tema": "ler",
+   "texto": "A fé cresce ouvindo a Palavra. Quer mais fé? Abra a Bíblia.",
+   "versiculos": [
+    {
+     "ref": "Romanos 10:17",
+     "texto": "De sorte que a fé é pelo ouvir, e o ouvir pela palavra de Deus."
+    }
+   ]
+  },
+  {
+   "tema": "ler",
+   "texto": "As notícias de hoje passam até amanhã. A Palavra fica para sempre.",
+   "versiculos": [
+    {
+     "ref": "Mateus 24:35",
+     "texto": "O céu e a terra passarão, mas as minhas palavras não hão de passar."
+    },
+    {
+     "ref": "Isaías 40:8",
+     "texto": "Seca-se a erva, e caem as flores, mas a palavra de nosso Deus subsiste eternamente."
+    }
+   ]
+  },
+  {
+   "tema": "ler",
+   "texto": "Deixe a Palavra morar em você com fartura, não só de visita.",
+   "versiculos": [
+    {
+     "ref": "Colossenses 3:16",
+     "texto": "A palavra de Cristo habite em vós abundantemente, em toda a sabedoria."
+    }
+   ]
+  },
+  {
+   "tema": "ler",
+   "texto": "Como o bebê deseja leite, deseje a Palavra. É assim que se cresce.",
+   "versiculos": [
+    {
+     "ref": "1 Pedro 2:2",
+     "texto": "Desejai afetuosamente, como meninos novamente nascidos, o leite racional, não falsificado, para que por ele vades crescendo."
+    }
+   ]
+  },
+  {
+   "tema": "ler",
+   "texto": "A Palavra é mais doce que o mel. Prove hoje.",
+   "versiculos": [
+    {
+     "ref": "Salmos 119:103",
+     "texto": "Oh! quão doces são as tuas palavras ao meu paladar! Mais doces do que o mel à minha boca."
+    },
+    {
+     "ref": "Salmos 19:10",
+     "texto": "Mais desejáveis são do que o ouro, sim, do que muito ouro fino; e mais doces do que o mel e o licor dos favos."
+    }
+   ]
+  },
+  {
+   "tema": "ler",
+   "texto": "A Palavra é a espada do Espírito. Não saia para o dia desarmado.",
+   "versiculos": [
+    {
+     "ref": "Efésios 6:17",
+     "texto": "Tomai também o capacete da salvação, e a espada do Espírito, que é a palavra de Deus."
+    }
+   ]
+  },
+  {
+   "tema": "ler",
+   "texto": "Jesus venceu a tentação com “está escrito”. Para usar, é preciso saber o que está escrito.",
+   "versiculos": [
+    {
+     "ref": "Mateus 4:10",
+     "texto": "Vai-te, Satanás, porque está escrito: Ao Senhor teu Deus adorarás, e só a ele servirás."
+    }
+   ]
+  },
+  {
+   "tema": "ler",
+   "texto": "A Palavra de Deus é a verdade, e a verdade santifica.",
+   "versiculos": [
+    {
+     "ref": "João 17:17",
+     "texto": "Santifica-os na verdade; a tua palavra é a verdade."
+    }
+   ]
+  },
+  {
+   "tema": "ler",
+   "texto": "Permanecer na Palavra é a marca do discípulo, e a verdade liberta.",
+   "versiculos": [
+    {
+     "ref": "João 8:31-32",
+     "texto": "Se vós permanecerdes na minha palavra, verdadeiramente sereis meus discípulos; e conhecereis a verdade, e a verdade vos libertará."
+    }
+   ]
+  },
+  {
+   "tema": "ler",
+   "texto": "Cansado por dentro? A lei do Senhor restaura a alma.",
+   "versiculos": [
+    {
+     "ref": "Salmos 19:7",
+     "texto": "A lei do Senhor é perfeita, e refrigera a alma; o testemunho do Senhor é fiel, e dá sabedoria aos símplices."
+    }
+   ]
+  },
+  {
+   "tema": "ler",
+   "texto": "Quem ouve e pratica constrói sobre a rocha. A tempestade vem para todos.",
+   "versiculos": [
+    {
+     "ref": "Mateus 7:24-25",
+     "texto": "Todo aquele, pois, que escuta estas minhas palavras, e as pratica, assemelhá-lo-ei ao homem prudente, que edificou a sua casa sobre a rocha."
+    }
+   ]
+  },
+  {
+   "tema": "ler",
+   "texto": "Bem-aventurado não é só quem ouve, é quem ouve e guarda.",
+   "versiculos": [
+    {
+     "ref": "Lucas 11:28",
+     "texto": "Antes bem-aventurados os que ouvem a palavra de Deus e a guardam."
+    }
+   ]
+  },
+  {
+   "tema": "ler",
+   "texto": "A Palavra é para a casa, para o caminho, para a hora de deitar e de levantar.",
+   "versiculos": [
+    {
+     "ref": "Deuteronômio 6:6-7",
+     "texto": "E estas palavras, que hoje te ordeno, estarão no teu coração; e as intimarás a teus filhos, e delas falarás assentado em tua casa, e andando pelo caminho, e deitando-te e levantando-te."
+    }
+   ]
+  },
+  {
+   "tema": "ler",
+   "texto": "Não precisa ser estudioso para entender. A Palavra dá luz aos simples.",
+   "versiculos": [
+    {
+     "ref": "Salmos 119:130",
+     "texto": "A exposição das tuas palavras dá luz; dá entendimento aos símplices."
+    }
+   ]
+  },
+  {
+   "tema": "ler",
+   "texto": "Quem ama a Palavra tem muita paz.",
+   "versiculos": [
+    {
+     "ref": "Salmos 119:165",
+     "texto": "Muita paz têm os que amam a tua lei, e para eles não há tropeço."
+    }
+   ]
+  },
+  {
+   "tema": "ler",
+   "texto": "Jesus é o Verbo. Ler a Bíblia é conhecer a Ele.",
+   "versiculos": [
+    {
+     "ref": "João 1:1",
+     "texto": "No princípio era o Verbo, e o Verbo estava com Deus, e o Verbo era Deus."
+    },
+    {
+     "ref": "João 1:14",
+     "texto": "E o Verbo se fez carne, e habitou entre nós."
+    }
+   ]
+  },
+  {
+   "tema": "ler",
+   "texto": "Esdras preparou o coração para buscar, cumprir e ensinar. Nessa ordem.",
+   "versiculos": [
+    {
+     "ref": "Esdras 7:10",
+     "texto": "Porque Esdras tinha preparado o seu coração para buscar a lei do Senhor, e para a cumprir, e para ensinar em Israel os seus estatutos e os seus direitos."
+    }
+   ]
+  },
+  {
+   "tema": "ler",
+   "texto": "Para quem mais iríamos? Só Ele tem palavras de vida eterna.",
+   "versiculos": [
+    {
+     "ref": "João 6:68",
+     "texto": "Senhor, para quem iremos nós? Tu tens as palavras da vida eterna."
+    },
+    {
+     "ref": "João 6:63",
+     "texto": "As palavras que eu vos disse são espírito e vida."
+    }
+   ]
+  },
+  {
+   "tema": "ler",
+   "texto": "Antes de abrir a Bíblia, peça olhos abertos.",
+   "versiculos": [
+    {
+     "ref": "Salmos 119:18",
+     "texto": "Desvenda os meus olhos, para que veja as maravilhas da tua lei."
+    }
+   ]
+  },
+  {
+   "tema": "ler",
+   "texto": "Busque primeiro o Reino. O resto vem depois, e vem acrescentado.",
+   "versiculos": [
+    {
+     "ref": "Mateus 6:33",
+     "texto": "Mas buscai primeiro o reino de Deus, e a sua justiça, e todas estas coisas vos serão acrescentadas."
+    }
+   ]
+  },
+  {
+   "tema": "orar",
+   "texto": "Orar sem cessar não é reunião marcada. É conversa que não termina.",
+   "versiculos": [
+    {
+     "ref": "1 Tessalonicenses 5:17",
+     "texto": "Orai sem cessar."
+    }
+   ]
+  },
+  {
+   "tema": "orar",
+   "texto": "Entre no quarto e feche a porta. O Pai vê em secreto.",
+   "versiculos": [
+    {
+     "ref": "Mateus 6:6",
+     "texto": "Mas tu, quando orares, entra no teu aposento e, fechando a tua porta, ora a teu Pai que está em secreto; e teu Pai, que vê em secreto, te recompensará."
+    }
+   ]
+  },
+  {
+   "tema": "orar",
+   "texto": "Troque a ansiedade por oração, com gratidão. A paz vem guardar o coração.",
+   "versiculos": [
+    {
+     "ref": "Filipenses 4:6",
+     "texto": "Não estejais inquietos por coisa alguma; antes as vossas petições sejam em tudo conhecidas diante de Deus pela oração e súplica, com ação de graças."
+    },
+    {
+     "ref": "Filipenses 4:7",
+     "texto": "E a paz de Deus, que excede todo o entendimento, guardará os vossos corações e os vossos sentimentos em Cristo Jesus."
+    }
+   ]
+  },
+  {
+   "tema": "orar",
+   "texto": "O peso que você carrega pode ser lançado sobre Ele. Ele cuida de você.",
+   "versiculos": [
+    {
+     "ref": "1 Pedro 5:7",
+     "texto": "Lançando sobre ele toda a vossa ansiedade, porque ele tem cuidado de vós."
+    }
+   ]
+  },
+  {
+   "tema": "orar",
+   "texto": "Peça, busque, bata. A porta não é de ferro para quem é filho.",
+   "versiculos": [
+    {
+     "ref": "Mateus 7:7",
+     "texto": "Pedi, e dar-se-vos-á; buscai, e encontrareis; batei, e abrir-se-vos-á."
+    }
+   ]
+  },
+  {
+   "tema": "orar",
+   "texto": "Jesus levantava cedo, ainda escuro, para orar. Comece o dia com Ele.",
+   "versiculos": [
+    {
+     "ref": "Marcos 1:35",
+     "texto": "E, levantando-se de manhã muito cedo, estando ainda escuro, saiu, e foi para um lugar deserto, e ali orava."
+    }
+   ]
+  },
+  {
+   "tema": "orar",
+   "texto": "Vigie e ore. A vontade até quer; a carne é fraca.",
+   "versiculos": [
+    {
+     "ref": "Mateus 26:41",
+     "texto": "Vigiai e orai, para que não entreis em tentação; o espírito, na verdade, está pronto, mas a carne é fraca."
+    }
+   ]
+  },
+  {
+   "tema": "orar",
+   "texto": "A oração de um justo pode muito. A sua também.",
+   "versiculos": [
+    {
+     "ref": "Tiago 5:16",
+     "texto": "Orai uns pelos outros, para que sareis. A oração feita por um justo pode muito em seus efeitos."
+    }
+   ]
+  },
+  {
+   "tema": "orar",
+   "texto": "Falta sabedoria para decidir? Peça. Deus dá sem humilhar ninguém.",
+   "versiculos": [
+    {
+     "ref": "Tiago 1:5",
+     "texto": "E, se algum de vós tem falta de sabedoria, peça-a a Deus, que a todos dá liberalmente, e o não lança em rosto, e ser-lhe-á dada."
+    }
+   ]
+  },
+  {
+   "tema": "orar",
+   "texto": "Ore por todos, inclusive pelos governantes de quem você reclama.",
+   "versiculos": [
+    {
+     "ref": "1 Timóteo 2:1-2",
+     "texto": "Admoesto-te, pois, antes de tudo, que se façam deprecações, orações, intercessões, e ações de graças, por todos os homens; pelos reis, e por todos os que estão em eminência."
+    }
+   ]
+  },
+  {
+   "tema": "orar",
+   "texto": "Orar por quem te fere é a oração mais difícil, e a que mais parece com Jesus.",
+   "versiculos": [
+    {
+     "ref": "Mateus 5:44",
+     "texto": "Amai a vossos inimigos, bendizei os que vos maldizem, fazei bem aos que vos odeiam, e orai pelos que vos maltratam e vos perseguem."
+    },
+    {
+     "ref": "Lucas 23:34",
+     "texto": "Pai, perdoa-lhes, porque não sabem o que fazem."
+    }
+   ]
+  },
+  {
+   "tema": "orar",
+   "texto": "Clame. Ele responde, e às vezes mostra o que você nem sabia perguntar.",
+   "versiculos": [
+    {
+     "ref": "Jeremias 33:3",
+     "texto": "Clama a mim, e responder-te-ei, e anunciar-te-ei coisas grandes e firmes que não sabes."
+    }
+   ]
+  },
+  {
+   "tema": "orar",
+   "texto": "Deus está perto de quem o chama de verdade, não de quem só cumpre ritual.",
+   "versiculos": [
+    {
+     "ref": "Salmos 145:18",
+     "texto": "Perto está o Senhor de todos os que o invocam, de todos os que o invocam em verdade."
+    }
+   ]
+  },
+  {
+   "tema": "orar",
+   "texto": "Não sabe o que dizer? O Espírito ajuda na sua fraqueza.",
+   "versiculos": [
+    {
+     "ref": "Romanos 8:26",
+     "texto": "Porque não sabemos o que havemos de pedir como convém, mas o mesmo Espírito intercede por nós com gemidos inexprimíveis."
+    }
+   ]
+  },
+  {
+   "tema": "orar",
+   "texto": "Chegue com confiança. O trono é de graça, não de condenação.",
+   "versiculos": [
+    {
+     "ref": "Hebreus 4:16",
+     "texto": "Cheguemos, pois, com confiança ao trono da graça, para que possamos alcançar misericórdia e achar graça, a fim de sermos ajudados em tempo oportuno."
+    }
+   ]
+  },
+  {
+   "tema": "orar",
+   "texto": "Persevere na oração, de olhos abertos e coração grato.",
+   "versiculos": [
+    {
+     "ref": "Colossenses 4:2",
+     "texto": "Perseverai em oração, velando nela com ação de graças."
+    }
+   ]
+  },
+  {
+   "tema": "orar",
+   "texto": "Jesus contou uma parábola só para dizer: ore sempre e não desanime.",
+   "versiculos": [
+    {
+     "ref": "Lucas 18:1",
+     "texto": "E contou-lhes também uma parábola sobre o dever de orar sempre, e nunca desfalecer."
+    }
+   ]
+  },
+  {
+   "tema": "orar",
+   "texto": "Pedir segundo a vontade dEle é pedir com a certeza de ser ouvido.",
+   "versiculos": [
+    {
+     "ref": "1 João 5:14",
+     "texto": "E esta é a confiança que temos nele, que, se pedirmos alguma coisa, segundo a sua vontade, ele nos ouve."
+    }
+   ]
+  },
+  {
+   "tema": "orar",
+   "texto": "Os discípulos pediram: ensina-nos a orar. Ele começou por “Pai nosso”.",
+   "versiculos": [
+    {
+     "ref": "Lucas 11:1-2",
+     "texto": "Senhor, ensina-nos a orar […]. E ele lhes disse: Quando orardes, dizei: Pai nosso, que estás nos céus, santificado seja o teu nome."
+    }
+   ]
+  },
+  {
+   "tema": "orar",
+   "texto": "Oração não é discurso comprido. O Pai já sabe do que você precisa.",
+   "versiculos": [
+    {
+     "ref": "Mateus 6:7-8",
+     "texto": "E, orando, não useis de vãs repetições […]. Porque vosso Pai sabe o que vos é necessário, antes de vós lho pedirdes."
+    }
+   ]
+  },
+  {
+   "tema": "orar",
+   "texto": "Daniel orava três vezes por dia, mesmo quando isso custava caro.",
+   "versiculos": [
+    {
+     "ref": "Daniel 6:10",
+     "texto": "E três vezes no dia se punha de joelhos, e orava, e dava graças diante do seu Deus, como também antes costumava fazer."
+    }
+   ]
+  },
+  {
+   "tema": "orar",
+   "texto": "Agradecer também é orar. Em tudo, até no dia comum.",
+   "versiculos": [
+    {
+     "ref": "1 Tessalonicenses 5:18",
+     "texto": "Em tudo dai graças, porque esta é a vontade de Deus em Cristo Jesus para convosco."
+    }
+   ]
+  },
+  {
+   "tema": "orar",
+   "texto": "Humildade, oração e arrependimento: o caminho para Deus ouvir e sarar.",
+   "versiculos": [
+    {
+     "ref": "2 Crônicas 7:14",
+     "texto": "E se o meu povo, que se chama pelo meu nome, se humilhar, e orar, e buscar a minha face, e se converter dos seus maus caminhos, então eu ouvirei dos céus, e perdoarei os seus pecados, e sararei a sua terra."
+    }
+   ]
+  },
+  {
+   "tema": "orar",
+   "texto": "Uma oração honesta: sonda-me. Deixe Deus mostrar o que você não vê.",
+   "versiculos": [
+    {
+     "ref": "Salmos 139:23-24",
+     "texto": "Sonda-me, ó Deus, e conhece o meu coração; prova-me, e conhece os meus pensamentos. E vê se há em mim algum caminho mau, e guia-me pelo caminho eterno."
+    }
+   ]
+  },
+  {
+   "tema": "orar",
+   "texto": "Ore em nome de Jesus. É por Ele que você tem acesso ao Pai.",
+   "versiculos": [
+    {
+     "ref": "João 14:13",
+     "texto": "E tudo quanto pedirdes em meu nome eu o farei, para que o Pai seja glorificado no Filho."
+    },
+    {
+     "ref": "João 14:6",
+     "texto": "Ninguém vem ao Pai, senão por mim."
+    }
+   ]
+  },
+  {
+   "tema": "orar",
+   "texto": "Ore em todo tempo, e lembre dos irmãos nas suas orações.",
+   "versiculos": [
+    {
+     "ref": "Efésios 6:18",
+     "texto": "Orando em todo o tempo com toda a oração e súplica no Espírito, e vigiando nisto com toda a perseverança e súplica por todos os santos."
+    }
+   ]
+  },
+  {
+   "tema": "orar",
+   "texto": "A oração mais forte de Jesus terminou assim: seja feita a tua vontade.",
+   "versiculos": [
+    {
+     "ref": "Lucas 22:42",
+     "texto": "Pai, se queres, passa de mim este cálice; todavia não se faça a minha vontade, mas a tua."
+    }
+   ]
+  },
+  {
+   "tema": "orar",
+   "texto": "Orar junto tem promessa. Chame alguém para orar com você.",
+   "versiculos": [
+    {
+     "ref": "Mateus 18:19",
+     "texto": "Se dois de vós concordarem na terra acerca de qualquer coisa que pedirem, isso lhes será feito por meu Pai, que está nos céus."
+    }
+   ]
+  },
+  {
+   "tema": "orar",
+   "texto": "Está aflito? Ore. Está contente? Cante. Os dois falam com Deus.",
+   "versiculos": [
+    {
+     "ref": "Tiago 5:13",
+     "texto": "Está alguém entre vós aflito? Ore. Está alguém contente? Cante louvores."
+    }
+   ]
+  },
+  {
+   "tema": "orar",
+   "texto": "Antes de uma grande decisão, Jesus passou a noite orando.",
+   "versiculos": [
+    {
+     "ref": "Lucas 6:12-13",
+     "texto": "Subiu ao monte a orar, e passou a noite em oração a Deus. E, quando já era dia, chamou a si os seus discípulos, e escolheu doze deles."
+    }
+   ]
+  },
+  {
+   "tema": "orar",
+   "texto": "De manhã, apresente o dia a Deus e fique atento à resposta.",
+   "versiculos": [
+    {
+     "ref": "Salmos 5:3",
+     "texto": "Pela manhã ouvirás a minha voz, ó Senhor; pela manhã apresentarei a ti a minha oração, e vigiarei."
+    }
+   ]
+  },
+  {
+   "tema": "igreja",
+   "texto": "Não abandone a reunião dos irmãos. O costume de alguns não precisa ser o seu.",
+   "versiculos": [
+    {
+     "ref": "Hebreus 10:24-25",
+     "texto": "E consideremo-nos uns aos outros, para nos estimularmos ao amor e às boas obras, não deixando a nossa congregação, como é costume de alguns, antes admoestando-nos uns aos outros."
+    }
+   ]
+  },
+  {
+   "tema": "igreja",
+   "texto": "Ir à casa do Senhor é alegria, não peso.",
+   "versiculos": [
+    {
+     "ref": "Salmos 122:1",
+     "texto": "Alegrei-me quando me disseram: Vamos à casa do Senhor."
+    }
+   ]
+  },
+  {
+   "tema": "igreja",
+   "texto": "Até Jesus tinha o costume de estar na reunião do povo de Deus.",
+   "versiculos": [
+    {
+     "ref": "Lucas 4:16",
+     "texto": "E, chegando a Nazaré, onde fora criado, entrou num dia de sábado, segundo o seu costume, na sinagoga, e levantou-se para ler."
+    }
+   ]
+  },
+  {
+   "tema": "igreja",
+   "texto": "Onde dois ou três se reúnem em nome dEle, Ele está no meio.",
+   "versiculos": [
+    {
+     "ref": "Mateus 18:20",
+     "texto": "Porque, onde estiverem dois ou três reunidos em meu nome, aí estou eu no meio deles."
+    }
+   ]
+  },
+  {
+   "tema": "igreja",
+   "texto": "A igreja do começo perseverava em quatro coisas: ensino, comunhão, pão e oração.",
+   "versiculos": [
+    {
+     "ref": "Atos 2:42",
+     "texto": "E perseveravam na doutrina dos apóstolos, e na comunhão, e no partir do pão, e nas orações."
+    }
+   ]
+  },
+  {
+   "tema": "igreja",
+   "texto": "Os primeiros cristãos se reuniam com alegria e coração simples.",
+   "versiculos": [
+    {
+     "ref": "Atos 2:46",
+     "texto": "E, perseverando unânimes todos os dias no templo, e partindo o pão em casa, comiam juntos com alegria e singeleza de coração."
+    }
+   ]
+  },
+  {
+   "tema": "igreja",
+   "texto": "Um dia na casa de Deus vale mais que mil em outro lugar.",
+   "versiculos": [
+    {
+     "ref": "Salmos 84:10",
+     "texto": "Porque vale mais um dia nos teus átrios do que mil."
+    }
+   ]
+  },
+  {
+   "tema": "igreja",
+   "texto": "Você é membro de um corpo. Membro solto não funciona, e o corpo sente a falta.",
+   "versiculos": [
+    {
+     "ref": "1 Coríntios 12:27",
+     "texto": "Ora, vós sois o corpo de Cristo, e seus membros em particular."
+    },
+    {
+     "ref": "1 Coríntios 12:26",
+     "texto": "E, se um membro padece, todos os membros padecem com ele."
+    }
+   ]
+  },
+  {
+   "tema": "igreja",
+   "texto": "Deus deu pastores e mestres para edificar você. Esteja onde eles ensinam.",
+   "versiculos": [
+    {
+     "ref": "Efésios 4:11-12",
+     "texto": "E ele mesmo deu uns para apóstolos, e outros para profetas, e outros para evangelistas, e outros para pastores e doutores, querendo o aperfeiçoamento dos santos, para a obra do ministério, para edificação do corpo de Cristo."
+    }
+   ]
+  },
+  {
+   "tema": "igreja",
+   "texto": "Cantar junto também ensina. Salmos, hinos e cânticos, com o coração.",
+   "versiculos": [
+    {
+     "ref": "Colossenses 3:16",
+     "texto": "Ensinando-vos e admoestando-vos uns aos outros, com salmos, hinos e cânticos espirituais, cantando ao Senhor com graça em vosso coração."
+    }
+   ]
+  },
+  {
+   "tema": "igreja",
+   "texto": "Como é bom e agradável os irmãos viverem unidos.",
+   "versiculos": [
+    {
+     "ref": "Salmos 133:1",
+     "texto": "Oh! quão bom e quão suave é que os irmãos vivam em união!"
+    }
+   ]
+  },
+  {
+   "tema": "igreja",
+   "texto": "A Ceia é feita juntos. Ela anuncia a morte do Senhor até que Ele volte.",
+   "versiculos": [
+    {
+     "ref": "1 Coríntios 11:26",
+     "texto": "Porque todas as vezes que comerdes este pão e beberdes este cálice anunciais a morte do Senhor, até que venha."
+    }
+   ]
+  },
+  {
+   "tema": "igreja",
+   "texto": "Cristo amou a igreja a ponto de se entregar por ela. Ame o que Ele ama.",
+   "versiculos": [
+    {
+     "ref": "Efésios 5:25",
+     "texto": "Cristo amou a igreja, e a si mesmo se entregou por ela."
+    }
+   ]
+  },
+  {
+   "tema": "igreja",
+   "texto": "A igreja é obra de Cristo, e nada a vence. Faça parte dela.",
+   "versiculos": [
+    {
+     "ref": "Mateus 16:18",
+     "texto": "Sobre esta pedra edificarei a minha igreja, e as portas do inferno não prevalecerão contra ela."
+    }
+   ]
+  },
+  {
+   "tema": "igreja",
+   "texto": "Seus pastores velam pela sua alma. Fique perto, para que o trabalho deles seja alegre.",
+   "versiculos": [
+    {
+     "ref": "Hebreus 13:17",
+     "texto": "Obedecei a vossos pastores, e sujeitai-vos a eles; porque velam por vossas almas, como aqueles que hão de dar conta delas; para que o façam com alegria e não gemendo."
+    }
+   ]
+  },
+  {
+   "tema": "igreja",
+   "texto": "Entre pelas portas com gratidão. Chegue já agradecendo.",
+   "versiculos": [
+    {
+     "ref": "Salmos 100:4",
+     "texto": "Entrai pelas portas dele com gratidão, e em seus átrios com louvor; louvai-o, e bendizei o seu nome."
+    }
+   ]
+  },
+  {
+   "tema": "igreja",
+   "texto": "Na igreja a Palavra é lida em voz alta, explicada e ensinada. Vá ouvir.",
+   "versiculos": [
+    {
+     "ref": "1 Timóteo 4:13",
+     "texto": "Persiste em ler, exortar e ensinar, até que eu vá."
+    },
+    {
+     "ref": "Neemias 8:8",
+     "texto": "E leram no livro, na lei de Deus, e declarando, e explicando o sentido, faziam que, lendo, se entendesse."
+    }
+   ]
+  },
+  {
+   "tema": "igreja",
+   "texto": "No primeiro dia da semana, os discípulos se reuniam. Guarde esse encontro.",
+   "versiculos": [
+    {
+     "ref": "Atos 20:7",
+     "texto": "E no primeiro dia da semana, ajuntando-se os discípulos para partir o pão, Paulo, que havia de partir no dia seguinte, falava com eles."
+    }
+   ]
+  },
+  {
+   "tema": "igreja",
+   "texto": "Davi pediu uma coisa só: morar na casa do Senhor.",
+   "versiculos": [
+    {
+     "ref": "Salmos 27:4",
+     "texto": "Uma coisa pedi ao Senhor, e a buscarei: que possa morar na casa do Senhor todos os dias da minha vida."
+    }
+   ]
+  },
+  {
+   "tema": "igreja",
+   "texto": "Você é pedra viva. Pedra viva se encaixa em outras para formar uma casa.",
+   "versiculos": [
+    {
+     "ref": "1 Pedro 2:5",
+     "texto": "Vós também, como pedras vivas, sois edificados casa espiritual e sacerdócio santo."
+    }
+   ]
+  },
+  {
+   "tema": "igreja",
+   "texto": "Somos muitos, mas um só corpo. Você pertence aos irmãos, e eles a você.",
+   "versiculos": [
+    {
+     "ref": "Romanos 12:5",
+     "texto": "Assim nós, que somos muitos, somos um só corpo em Cristo, mas individualmente somos membros uns dos outros."
+    }
+   ]
+  },
+  {
+   "tema": "igreja",
+   "texto": "Vá à reunião levando algo para edificar alguém, não só para receber.",
+   "versiculos": [
+    {
+     "ref": "1 Coríntios 14:26",
+     "texto": "Quando vos ajuntais, cada um de vós tem salmo, tem doutrina […]. Faça-se tudo para edificação."
+    }
+   ]
+  },
+  {
+   "tema": "igreja",
+   "texto": "Na igreja você não é visita. É da família de Deus.",
+   "versiculos": [
+    {
+     "ref": "Efésios 2:19",
+     "texto": "Assim que já não sois estrangeiros, nem forasteiros, mas concidadãos dos santos, e da família de Deus."
+    }
+   ]
+  },
+  {
+   "tema": "igreja",
+   "texto": "Árvore plantada na casa do Senhor floresce. A sua também.",
+   "versiculos": [
+    {
+     "ref": "Salmos 92:13",
+     "texto": "Os que estão plantados na casa do Senhor florescerão nos átrios do nosso Deus."
+    },
+    {
+     "ref": "Salmos 92:14",
+     "texto": "Na velhice ainda darão frutos; serão viçosos e florescentes."
+    }
+   ]
+  },
+  {
+   "tema": "igreja",
+   "texto": "Vamos subir juntos para aprender os caminhos de Deus.",
+   "versiculos": [
+    {
+     "ref": "Isaías 2:3",
+     "texto": "Vinde, subamos ao monte do Senhor, à casa do Deus de Jacó, para que nos ensine o que concerne aos seus caminhos, e andemos nas suas veredas."
+    }
+   ]
+  },
+  {
+   "tema": "igreja",
+   "texto": "Em Antioquia, um ano inteiro de reuniões formou gente que o mundo chamou de cristã.",
+   "versiculos": [
+    {
+     "ref": "Atos 11:26",
+     "texto": "E sucedeu que todo um ano se reuniram naquela igreja, e ensinaram muita gente; e em Antioquia foram os discípulos, pela primeira vez, chamados cristãos."
+    }
+   ]
+  },
+  {
+   "tema": "igreja",
+   "texto": "A igreja é coluna e firmeza da verdade. Fique perto da coluna.",
+   "versiculos": [
+    {
+     "ref": "1 Timóteo 3:15",
+     "texto": "A casa de Deus, que é a igreja do Deus vivo, a coluna e firmeza da verdade."
+    }
+   ]
+  },
+  {
+   "tema": "igreja",
+   "texto": "Ao entrar na casa de Deus, vá mais para ouvir do que para falar.",
+   "versiculos": [
+    {
+     "ref": "Eclesiastes 5:1",
+     "texto": "Guarda o teu pé, quando entrares na casa de Deus; e inclina-te mais a ouvir."
+    }
+   ]
+  },
+  {
+   "tema": "igreja",
+   "texto": "Adorar junto, de joelhos diante de quem nos fez.",
+   "versiculos": [
+    {
+     "ref": "Salmos 95:6",
+     "texto": "Ó, vinde, adoremos e prostremo-nos; ajoelhemos diante do Senhor que nos criou."
+    }
+   ]
+  },
+  {
+   "tema": "igreja",
+   "texto": "Igreja é também casa aberta: comida simples, oração e cuidado mútuo.",
+   "versiculos": [
+    {
+     "ref": "Romanos 12:13",
+     "texto": "Comunicai com os santos nas suas necessidades, segui a hospitalidade."
+    },
+    {
+     "ref": "Atos 2:44",
+     "texto": "E todos os que criam estavam juntos, e tinham tudo em comum."
+    }
+   ]
+  },
+  {
+   "tema": "comunhao",
+   "texto": "Ferro afia ferro. Precisa de alguém perto o bastante para afiar você.",
+   "versiculos": [
+    {
+     "ref": "Provérbios 27:17",
+     "texto": "Como o ferro com o ferro se aguça, assim o homem afia o rosto do seu amigo."
+    }
+   ]
+  },
+  {
+   "tema": "comunhao",
+   "texto": "Sozinho, quando cai, quem levanta? Ande com alguém.",
+   "versiculos": [
+    {
+     "ref": "Eclesiastes 4:9-10",
+     "texto": "Melhor é serem dois do que um […]. Porque se um cair, o outro levanta o seu companheiro; mas ai do que estiver só; pois, caindo, não haverá outro que o levante."
+    }
+   ]
+  },
+  {
+   "tema": "comunhao",
+   "texto": "A ferida feita por quem ama é fiel. Agradeça quem tem coragem de corrigir você.",
+   "versiculos": [
+    {
+     "ref": "Provérbios 27:6",
+     "texto": "Fiéis são as feridas feitas pelo que ama, mas os beijos do que odeia são enganosos."
+    }
+   ]
+  },
+  {
+   "tema": "comunhao",
+   "texto": "Quem ama a correção ama o conhecimento. Quem odeia ser repreendido fica parado.",
+   "versiculos": [
+    {
+     "ref": "Provérbios 12:1",
+     "texto": "O que ama a correção ama o conhecimento, mas o que aborrece a repreensão é bruto."
+    }
+   ]
+  },
+  {
+   "tema": "comunhao",
+   "texto": "Ouvido que aceita repreensão mora entre os sábios.",
+   "versiculos": [
+    {
+     "ref": "Provérbios 15:31-32",
+     "texto": "Os ouvidos que atendem à repreensão da vida no meio dos sábios farão a sua morada. […] o que escuta a repreensão adquire entendimento."
+    }
+   ]
+  },
+  {
+   "tema": "comunhao",
+   "texto": "Quando um irmão cair, ajude a levantar com mansidão, lembrando que você também pode cair.",
+   "versiculos": [
+    {
+     "ref": "Gálatas 6:1",
+     "texto": "Irmãos, se algum homem chegar a ser surpreendido nalguma ofensa, vós, que sois espirituais, encaminhai o tal com espírito de mansidão; olhando por ti mesmo, para que não sejas também tentado."
+    }
+   ]
+  },
+  {
+   "tema": "comunhao",
+   "texto": "Carregue o peso de alguém hoje. Assim se cumpre a lei de Cristo.",
+   "versiculos": [
+    {
+     "ref": "Gálatas 6:2",
+     "texto": "Levai as cargas uns dos outros, e assim cumprireis a lei de Cristo."
+    }
+   ]
+  },
+  {
+   "tema": "comunhao",
+   "texto": "Exortem-se todos os dias, enquanto se chama Hoje. O pecado endurece devagar.",
+   "versiculos": [
+    {
+     "ref": "Hebreus 3:13",
+     "texto": "Antes, exortai-vos uns aos outros todos os dias, durante o tempo que se chama Hoje, para que nenhum de vós se endureça pelo engano do pecado."
+    }
+   ]
+  },
+  {
+   "tema": "comunhao",
+   "texto": "Confessar a um irmão de confiança e orar juntos traz cura.",
+   "versiculos": [
+    {
+     "ref": "Tiago 5:16",
+     "texto": "Confessai as vossas culpas uns aos outros, e orai uns pelos outros, para que sareis."
+    }
+   ]
+  },
+  {
+   "tema": "comunhao",
+   "texto": "Andar na luz é andar junto. Comunhão e purificação vêm no mesmo verso.",
+   "versiculos": [
+    {
+     "ref": "1 João 1:7",
+     "texto": "Mas, se andarmos na luz, como ele na luz está, temos comunhão uns com os outros, e o sangue de Jesus Cristo, seu Filho, nos purifica de todo o pecado."
+    }
+   ]
+  },
+  {
+   "tema": "comunhao",
+   "texto": "O mundo reconhece um discípulo pelo amor aos irmãos.",
+   "versiculos": [
+    {
+     "ref": "João 13:34-35",
+     "texto": "Que vos ameis uns aos outros; como eu vos amei a vós, que também vós uns aos outros vos ameis. Nisto todos conhecerão que sois meus discípulos, se vos amardes uns aos outros."
+    }
+   ]
+  },
+  {
+   "tema": "comunhao",
+   "texto": "Competir em honrar o outro: é a única disputa boa.",
+   "versiculos": [
+    {
+     "ref": "Romanos 12:10",
+     "texto": "Amai-vos cordialmente uns aos outros com amor fraternal, preferindo-vos em honra uns aos outros."
+    }
+   ]
+  },
+  {
+   "tema": "comunhao",
+   "texto": "Encoraje alguém hoje. Uma palavra pode levantar uma semana inteira.",
+   "versiculos": [
+    {
+     "ref": "1 Tessalonicenses 5:11",
+     "texto": "Por isso exortai-vos uns aos outros, e edificai-vos uns aos outros, como também o fazeis."
+    }
+   ]
+  },
+  {
+   "tema": "comunhao",
+   "texto": "O sábio ama quem o repreende. Seja esse sábio.",
+   "versiculos": [
+    {
+     "ref": "Provérbios 9:8-9",
+     "texto": "Repreende o sábio, e ele te amará. Dá instrução ao sábio, e ele se fará mais sábio."
+    }
+   ]
+  },
+  {
+   "tema": "comunhao",
+   "texto": "Se alguém pecar contra você, fale primeiro com ele, a sós. O objetivo é ganhar o irmão.",
+   "versiculos": [
+    {
+     "ref": "Mateus 18:15",
+     "texto": "Se teu irmão pecar contra ti, vai, e repreende-o entre ti e ele só; se te ouvir, ganhaste a teu irmão."
+    }
+   ]
+  },
+  {
+   "tema": "comunhao",
+   "texto": "Diga-me com quem andas: quem anda com sábios fica sábio.",
+   "versiculos": [
+    {
+     "ref": "Provérbios 13:20",
+     "texto": "O que anda com os sábios ficará sábio, mas o companheiro dos tolos será afligido."
+    }
+   ]
+  },
+  {
+   "tema": "comunhao",
+   "texto": "Más companhias corrompem bons costumes. Escolha bem quem te influencia.",
+   "versiculos": [
+    {
+     "ref": "1 Coríntios 15:33",
+     "texto": "Não vos enganeis: as más conversações corrompem os bons costumes."
+    }
+   ]
+  },
+  {
+   "tema": "comunhao",
+   "texto": "Decisão importante? Ouça mais de um conselheiro.",
+   "versiculos": [
+    {
+     "ref": "Provérbios 11:14",
+     "texto": "Não havendo sábios conselhos, o povo cai, mas na multidão de conselheiros há segurança."
+    }
+   ]
+  },
+  {
+   "tema": "comunhao",
+   "texto": "Receba o conselho hoje para ser sábio amanhã.",
+   "versiculos": [
+    {
+     "ref": "Provérbios 19:20",
+     "texto": "Ouve o conselho, e recebe a correção, para que no fim sejas sábio."
+    }
+   ]
+  },
+  {
+   "tema": "comunhao",
+   "texto": "Correção dói na hora. Depois dá fruto de paz.",
+   "versiculos": [
+    {
+     "ref": "Hebreus 12:11",
+     "texto": "E, na verdade, toda a correção, ao presente, não parece ser de gozo, senão de tristeza, mas depois produz um fruto pacífico de justiça nos exercitados por ela."
+    }
+   ]
+  },
+  {
+   "tema": "comunhao",
+   "texto": "Esconder o pecado não prospera. Confessar e deixar alcança misericórdia.",
+   "versiculos": [
+    {
+     "ref": "Provérbios 28:13",
+     "texto": "O que encobre as suas transgressões nunca prosperará, mas o que as confessa e deixa alcançará misericórdia."
+    }
+   ]
+  },
+  {
+   "tema": "comunhao",
+   "texto": "Natã teve coragem de dizer “tu és este homem”. Davi teve humildade de ouvir.",
+   "versiculos": [
+    {
+     "ref": "2 Samuel 12:7",
+     "texto": "Então disse Natã a Davi: Tu és este homem."
+    },
+    {
+     "ref": "2 Samuel 12:13",
+     "texto": "Então disse Davi a Natã: Pequei contra o Senhor."
+    }
+   ]
+  },
+  {
+   "tema": "comunhao",
+   "texto": "Fale a verdade, mas fale em amor. As duas coisas juntas fazem crescer.",
+   "versiculos": [
+    {
+     "ref": "Efésios 4:15",
+     "texto": "Antes, seguindo a verdade em amor, cresçamos em tudo naquele que é a cabeça, Cristo."
+    }
+   ]
+  },
+  {
+   "tema": "comunhao",
+   "texto": "Perdoe como você foi perdoado. É a base de toda comunhão.",
+   "versiculos": [
+    {
+     "ref": "Efésios 4:32",
+     "texto": "Antes sede uns para com os outros benignos, misericordiosos, perdoando-vos uns aos outros, como também Deus vos perdoou em Cristo."
+    }
+   ]
+  },
+  {
+   "tema": "comunhao",
+   "texto": "Humildade é considerar o outro, não só os próprios interesses.",
+   "versiculos": [
+    {
+     "ref": "Filipenses 2:3-4",
+     "texto": "Nada façais por contenda ou por vanglória, mas por humildade; cada um considere os outros superiores a si mesmo. Não atente cada um para o que é propriamente seu, mas cada qual também para o que é dos outros."
+    }
+   ]
+  },
+  {
+   "tema": "comunhao",
+   "texto": "O amor cobre muitos pecados. Seja paciente com os irmãos.",
+   "versiculos": [
+    {
+     "ref": "1 Pedro 4:8",
+     "texto": "Mas, sobretudo, tende ardente amor uns para com os outros; porque o amor cobrirá a multidão de pecados."
+    }
+   ]
+  },
+  {
+   "tema": "comunhao",
+   "texto": "O amigo ama em todo tempo, e o irmão nasce para a hora da angústia.",
+   "versiculos": [
+    {
+     "ref": "Provérbios 17:17",
+     "texto": "Em todo o tempo ama o amigo, e para a angústia nasce o irmão."
+    }
+   ]
+  },
+  {
+   "tema": "comunhao",
+   "texto": "Vocês são capazes de aconselhar uns aos outros. Use isso com bondade.",
+   "versiculos": [
+    {
+     "ref": "Romanos 15:14",
+     "texto": "Eu próprio, meus irmãos, certo estou, a respeito de vós, que vós mesmos estais cheios de bondade, cheios de todo o conhecimento, podendo admoestar-vos uns aos outros."
+    }
+   ]
+  },
+  {
+   "tema": "comunhao",
+   "texto": "Desde o começo Deus disse: não é bom estar só.",
+   "versiculos": [
+    {
+     "ref": "Gênesis 2:18",
+     "texto": "Não é bom que o homem esteja só."
+    }
+   ]
+  },
+  {
+   "tema": "comunhao",
+   "texto": "A repreensão do justo é como óleo na cabeça. Não recuse.",
+   "versiculos": [
+    {
+     "ref": "Salmos 141:5",
+     "texto": "Fira-me o justo, será isso uma benignidade; e repreenda-me, será um excelente óleo, que não me quebrará a cabeça."
+    }
+   ]
+  },
+  {
+   "tema": "comunhao",
+   "texto": "Quem corrige o irmão com paciência e boa doutrina faz o que Paulo mandou Timóteo fazer.",
+   "versiculos": [
+    {
+     "ref": "2 Timóteo 4:2",
+     "texto": "Que pregues a palavra, instes a tempo e fora de tempo, redarguas, repreendas, exortes, com toda a longanimidade e doutrina."
+    }
+   ]
+  }
+ ]
+}
